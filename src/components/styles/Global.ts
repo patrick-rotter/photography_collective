@@ -31,8 +31,7 @@ html {
 }
 
 body {
-  background-color: black;
-  margin: 16px;
+  margin: 0;
   font-family: 'Tungsten';
   color: #ffffff;
 }

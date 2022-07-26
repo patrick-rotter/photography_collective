@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { sPhotoHeight, sPhotoWidth, padding } from '../../global/constants'
 import { StyledPhotoType } from '../../global/types'
 import { Photo } from '../../global/types'
+import { transition } from './ActivePhoto'
 
 const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   position: absolute;
@@ -19,13 +20,14 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 const variants = {
   exit: {
     x: -300,
-    y: 300
+    y: 300,
+    opacity: 0
   }
 }
 
 export const PrevPhoto: React.FC<Photo> = (props) => {
   return (
-    <AnimatePresence initial={false}>
+    <AnimatePresence exitBeforeEnter>
       <StyledPhoto
         $bottom={padding}
         $left={padding}
@@ -36,6 +38,7 @@ export const PrevPhoto: React.FC<Photo> = (props) => {
         alt="Previous image"
         variants={variants}
         exit="exit"
+        transition={transition}
       />
     </AnimatePresence>
   )

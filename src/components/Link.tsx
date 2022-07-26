@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
-
-interface Props {}
+import { useStore } from '../store'
 
 const StyledLink = styled.div`
+  position: absolute;
+  bottom: 93px;
+  right: 155px;
   font-family: Helvetica;
   font-size: 10px;
   text-transform: uppercase;
@@ -34,11 +36,21 @@ const StyledDate = styled.div`
   text-align: right;
 `
 
-export const Link: React.FC<Props> = () => {
+export const Link: React.FC = () => {
+  const { author, commissionedFor, date } = useStore(
+    (state) => state.activePhoto
+  )
+  const month = date.toLocaleString('default', { month: 'short' })
+  const year = date.getFullYear()
+
   return (
     <StyledLink>
-      <div>Johanna Hobel for Vogue</div>
-      <StyledDate>Jun 2019</StyledDate>
+      <div>
+        {author} for {commissionedFor}{' '}
+      </div>
+      <StyledDate>
+        {month} {year}
+      </StyledDate>
       <StyledButton>HAVE A LOOK</StyledButton>
     </StyledLink>
   )

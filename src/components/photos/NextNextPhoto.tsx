@@ -45,7 +45,7 @@ export const NextNextPhoto: React.FC<Photo> = (props) => {
         alt="NextNext image"
         variants={variants}
         initial="initial"
-        exit="exitDown"
+        exit={props.exitAnimation}
         transition={transition}
       />
     </AnimatePresence>

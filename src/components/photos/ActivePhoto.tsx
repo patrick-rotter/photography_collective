@@ -57,7 +57,7 @@ export const ActivePhoto: React.FC<Photo> = (props) => {
         key={props.id}
         alt="Active image"
         variants={variants}
-        exit="exitDown"
+        exit={props.exitAnimation}
         transition={transition}
       />
     </AnimatePresence>

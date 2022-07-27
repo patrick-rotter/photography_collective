@@ -46,7 +46,7 @@ export const PrevPrevPhoto: React.FC<Photo> = (props) => {
         alt="PrevPrev image"
         variants={variants}
         initial="initial"
-        exit="exitDown"
+        exit={props.exitAnimation}
         transition={transition}
       />
     </AnimatePresence>

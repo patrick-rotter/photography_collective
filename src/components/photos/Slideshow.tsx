@@ -7,12 +7,14 @@ import { NextNextPhoto } from './NextNextPhoto'
 import { PrevPrevPhoto } from './PrevPrevPhoto'
 
 export const Slideshow: React.FC = () => {
+  const [exitAnimation, setExitAnimation] = useState('exitDown')
+
   const [indices, setIndices] = useState({
-    prevPrevIndex: 3,
-    prevIndex: 4,
-    activeIndex: 0,
-    nextIndex: 1,
-    nextNextIndex: 2
+    prevPrevIndex: 4,
+    prevIndex: 0,
+    activeIndex: 1,
+    nextIndex: 2,
+    nextNextIndex: 3
   })
 
   const [images, setImages] = useState({
@@ -32,12 +34,14 @@ export const Slideshow: React.FC = () => {
 
   const getPrevPhotoIndex = (index: number): number => {
     if (index === 0) {
-      return 4
+      return photos.length - 1
     }
     return index - 1
   }
 
   const moveDown = () => {
+    setExitAnimation('exitDown')
+
     setIndices({
       prevPrevIndex: getNextPhotoIndex(indices.prevPrevIndex),
       prevIndex: getNextPhotoIndex(indices.prevIndex),
@@ -63,6 +67,8 @@ export const Slideshow: React.FC = () => {
   }
 
   const moveUp = () => {
+    setExitAnimation('exitUp')
+
     setIndices({
       prevPrevIndex: getPrevPhotoIndex(indices.prevPrevIndex),
       prevIndex: getPrevPhotoIndex(indices.prevIndex),
@@ -82,11 +88,19 @@ export const Slideshow: React.FC = () => {
 
   return (
     <div>
-      <NextNextPhoto {...images.nextNext} />
-      <NextPhoto {...images.next} onPress={moveDown} />
-      <ActivePhoto {...images.active} />
-      <PrevPhoto {...images.prev} onPress={moveUp} />
-      <PrevPrevPhoto {...images.prevPrev} />
+      <NextNextPhoto {...images.nextNext} exitAnimation={exitAnimation} />
+      <NextPhoto
+        {...images.next}
+        exitAnimation={exitAnimation}
+        onPress={moveDown}
+      />
+      <ActivePhoto {...images.active} exitAnimation={exitAnimation} />
+      <PrevPhoto
+        {...images.prev}
+        exitAnimation={exitAnimation}
+        onPress={moveUp}
+      />
+      <PrevPrevPhoto {...images.prevPrev} exitAnimation={exitAnimation} />
     </div>
   )
 }

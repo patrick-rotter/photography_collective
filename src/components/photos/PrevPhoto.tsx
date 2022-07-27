@@ -49,7 +49,7 @@ export const PrevPhoto: React.FC<Photo> = (props) => {
         key={props.id}
         alt="Previous image"
         variants={variants}
-        exit="exitDown"
+        exit={props.exitAnimation}
         transition={transition}
         onClick={props.onPress}
       />

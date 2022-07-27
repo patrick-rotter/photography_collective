@@ -49,7 +49,7 @@ export const NextPhoto: React.FC<Photo> = (props) => {
         key={props.id}
         alt="Next image"
         variants={variants}
-        exit="exitDown"
+        exit={props.exitAnimation}
         transition={transition}
         onClick={props.onPress}
       />

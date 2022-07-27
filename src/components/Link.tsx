@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useStore } from '../store'
+import { motion, AnimatePresence } from 'framer-motion'
 
-const StyledLink = styled.div`
+const StyledLink = styled(motion.div)`
   position: absolute;
   bottom: 93px;
   right: 155px;
@@ -36,6 +37,18 @@ const StyledDate = styled.div`
   text-align: right;
 `
 
+const variants = {
+  initial: {
+    opacity: 0
+  },
+  animate: {
+    opacity: 1
+  },
+  exit: {
+    opacity: 0
+  }
+}
+
 export const Link: React.FC = () => {
   const { author, commissionedFor, date } = useStore(
     (state) => state.activePhoto
@@ -44,14 +57,23 @@ export const Link: React.FC = () => {
   const year = date.getFullYear()
 
   return (
-    <StyledLink>
-      <div>
-        {author} for {commissionedFor}{' '}
-      </div>
-      <StyledDate>
-        {month} {year}
-      </StyledDate>
-      <StyledButton>HAVE A LOOK</StyledButton>
-    </StyledLink>
+    <AnimatePresence>
+      <StyledLink
+        variants={variants}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        transition={{ duration: 1 }}
+        key={author + commissionedFor + month + year}
+      >
+        <motion.div>
+          {author} for {commissionedFor}{' '}
+        </motion.div>
+        <StyledDate>
+          {month} {year}
+        </StyledDate>
+        <StyledButton>HAVE A LOOK</StyledButton>
+      </StyledLink>
+    </AnimatePresence>
   )
 }

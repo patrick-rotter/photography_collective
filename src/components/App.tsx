@@ -4,9 +4,11 @@ import { Link } from './Link'
 import GlobalStyles from './styles/Global'
 import styled from 'styled-components'
 import { Slideshow } from './photos/Slideshow'
+import { useStore } from '../store'
+import { StyledContentType } from '../global/types'
 
 // TODO: fine tune background blur
-const StyledContent = styled.div`
+const StyledContent = styled.div<StyledContentType>`
   position: relative;
   width: 100vw;
   height: 100vh;
@@ -25,7 +27,7 @@ const StyledContent = styled.div`
     z-index: -1;
 
     display: block;
-    background-image: url('./images/image02.jpg');
+    background-image: url(${(props) => props.background});
     background-attachment: scroll;
     background-position: center;
     background-repeat: no-repeat;
@@ -69,8 +71,10 @@ const StyledNext = styled.div`
 `
 
 const App: React.FC = () => {
+  const { url } = useStore((state) => state.activePhoto)
+
   return (
-    <StyledContent>
+    <StyledContent background={url}>
       <GlobalStyles />
       <Title />
       <StyledPrev />

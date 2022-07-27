@@ -5,9 +5,11 @@ import { PrevPhoto } from '../photos/PrevPhoto'
 import { photos } from '../../fixtures/photos'
 import { NextNextPhoto } from './NextNextPhoto'
 import { PrevPrevPhoto } from './PrevPrevPhoto'
+import { useStore } from '../../store'
 
 export const Slideshow: React.FC = () => {
   const [exitAnimation, setExitAnimation] = useState('exitDown')
+  const { activePhoto, setActivePhoto } = useStore((state) => state)
 
   const [indices, setIndices] = useState({
     prevPrevIndex: 4,
@@ -58,6 +60,10 @@ export const Slideshow: React.FC = () => {
       nextNext: photos[indices.nextNextIndex]
     })
 
+    setActivePhoto(indices.activeIndex)
+
+    console.log(activePhoto)
+
     console.log(indices.prevPrevIndex)
     console.log(indices.prevIndex)
     console.log(indices.activeIndex)
@@ -84,6 +90,8 @@ export const Slideshow: React.FC = () => {
       next: photos[indices.nextIndex],
       nextNext: photos[indices.nextNextIndex]
     })
+
+    setActivePhoto(indices.activeIndex)
   }
 
   return (

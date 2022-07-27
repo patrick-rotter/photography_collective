@@ -21,3 +21,7 @@ export type StyledPhotoType = {
   $right?: number
   $left?: number
 }
+
+export type StyledContentType = {
+  background: string
+}

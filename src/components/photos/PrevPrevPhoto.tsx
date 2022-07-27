@@ -18,10 +18,18 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 `
 
 const variants = {
-  exit: {
+  initial: {
+    opacity: 0
+  },
+  exitDown: {
     x: -300,
     y: 300,
     opacity: 0
+  },
+  exitUp: {
+    x: sPhotoWidth + padding,
+    y: -(sPhotoHeight + padding),
+    opacity: 1
   }
 }
 
@@ -37,6 +45,8 @@ export const PrevPrevPhoto: React.FC<Photo> = (props) => {
         key={props.id}
         alt="PrevPrev image"
         variants={variants}
+        initial="initial"
+        exit="exitDown"
         transition={transition}
       />
     </AnimatePresence>

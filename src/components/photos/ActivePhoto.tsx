@@ -24,9 +24,15 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 `
 // exit y: -6 is necessary for smooth docking... but why?
 const variants = {
-  exit: {
+  exitDown: {
     x: -(window.innerWidth / 2 - (lPhotoWidth / 2 + padding)),
     y: window.innerHeight / 2 - 6,
+    width: sPhotoWidth,
+    height: sPhotoHeight
+  },
+  exitUp: {
+    x: window.innerWidth / 2 - 6,
+    y: -window.innerHeight / 2 + (lPhotoHeight / 2 + padding),
     width: sPhotoWidth,
     height: sPhotoHeight
   }
@@ -34,7 +40,7 @@ const variants = {
 
 export const transition = {
   type: 'tween',
-  duration: 2
+  duration: 1
 }
 
 // onExitComplete() from framer motion for animating in text
@@ -51,7 +57,7 @@ export const ActivePhoto: React.FC<Photo> = (props) => {
         key={props.id}
         alt="Active image"
         variants={variants}
-        exit="exit"
+        exit="exitDown"
         transition={transition}
       />
     </AnimatePresence>

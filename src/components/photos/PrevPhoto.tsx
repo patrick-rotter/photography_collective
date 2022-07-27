@@ -1,7 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
-import { sPhotoHeight, sPhotoWidth, padding } from '../../global/constants'
+import {
+  sPhotoHeight,
+  sPhotoWidth,
+  lPhotoHeight,
+  lPhotoWidth,
+  padding
+} from '../../global/constants'
 import { StyledPhotoType } from '../../global/types'
 import { Photo } from '../../global/types'
 import { transition } from './ActivePhoto'
@@ -18,10 +24,16 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 `
 
 const variants = {
-  exit: {
+  exitDown: {
     x: -300,
     y: 300,
     opacity: 0
+  },
+  exitUp: {
+    x: window.innerWidth / 2 - (lPhotoWidth / 2 + padding),
+    y: -(window.innerHeight / 2 - (lPhotoHeight / 2 + padding)),
+    width: lPhotoWidth,
+    height: lPhotoHeight
   }
 }
 
@@ -37,7 +49,7 @@ export const PrevPhoto: React.FC<Photo> = (props) => {
         key={props.id}
         alt="Previous image"
         variants={variants}
-        exit="exit"
+        exit="exitDown"
         transition={transition}
       />
     </AnimatePresence>

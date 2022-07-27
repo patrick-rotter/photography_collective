@@ -24,11 +24,16 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 `
 
 const variants = {
-  exit: {
-    x: -(window.innerWidth / 2 - 272),
-    y: window.innerHeight / 2 - 356,
+  exitDown: {
+    x: -(window.innerWidth / 2 - (lPhotoWidth / 2 + padding)),
+    y: window.innerHeight / 2 - (lPhotoHeight / 2 + padding),
     width: lPhotoWidth,
     height: lPhotoHeight
+  },
+  exitUp: {
+    x: 300,
+    y: -300,
+    opacity: 0
   }
 }
 
@@ -44,7 +49,7 @@ export const NextPhoto: React.FC<Photo> = (props) => {
         key={props.id}
         alt="Next image"
         variants={variants}
-        exit="exit"
+        exit="exitDown"
         transition={transition}
       />
     </AnimatePresence>

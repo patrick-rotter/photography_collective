@@ -21,10 +21,14 @@ const variants = {
   initial: {
     opacity: 0
   },
-  exit: {
+  exitDown: {
     x: -(sPhotoWidth + padding),
     y: sPhotoHeight + padding,
     opacity: 1
+  },
+  exitUp: {
+    x: 300,
+    y: -300
   }
 }
 
@@ -41,7 +45,7 @@ export const NextNextPhoto: React.FC<Photo> = (props) => {
         alt="NextNext image"
         variants={variants}
         initial="initial"
-        exit="exit"
+        exit="exitDown"
         transition={transition}
       />
     </AnimatePresence>

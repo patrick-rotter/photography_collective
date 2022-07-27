@@ -25,3 +25,7 @@ export type StyledPhotoType = {
 export type StyledContentType = {
   background: string
 }
+
+export type StyledIndicatorType = {
+  active: boolean
+}

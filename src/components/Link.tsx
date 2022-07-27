@@ -10,7 +10,8 @@ const StyledLink = styled(motion.div)`
   font-family: Helvetica;
   font-size: 10px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.08em;
+  line-height: 120%;
   width: 109px;
 `
 

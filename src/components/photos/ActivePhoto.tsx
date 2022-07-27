@@ -10,6 +10,8 @@ import {
 } from '../../global/constants'
 import { StyledPhotoType } from '../../global/types'
 import { Photo } from '../../global/types'
+import { ImageText } from './ImageText'
+import { IndicatorBar } from './IndicatorBar'
 
 const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   position: fixed;
@@ -22,6 +24,16 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   border-radius: 10px;
   border: 1px solid #000000;
 `
+
+const Container = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+`
+
 // exit y: -6 is necessary for smooth docking... but why?
 const variants = {
   exitDown: {
@@ -60,6 +72,10 @@ export const ActivePhoto: React.FC<Photo> = (props) => {
         exit={props.exitAnimation}
         transition={transition}
       />
+      <Container>
+        <ImageText />
+        <IndicatorBar />
+      </Container>
     </AnimatePresence>
   )
 }

@@ -37,9 +37,13 @@ export const IndicatorBar: React.FC = () => {
       <Container>
         {Array(photos.length)
           .fill(0)
-          .map((_, i) => (
-            <Indicator />
-          ))}
+          .map((_, i) =>
+            i === id - 1 ? (
+              <Indicator filled={true} />
+            ) : (
+              <Indicator filled={false} />
+            )
+          )}
       </Container>
     </StyledIndicatorBar>
   )

@@ -10,6 +10,10 @@ const StyledIndicator = styled.div<StyledIndicatorType>`
   background-color: ${(props) => (props.active ? 'white' : 'none')};
 `
 
-export const Indicator: React.FC = () => {
-  return <StyledIndicator active={false} />
+type Props = {
+  filled: boolean
+}
+
+export const Indicator: React.FC<Props> = (props) => {
+  return <StyledIndicator active={props.filled} />
 }

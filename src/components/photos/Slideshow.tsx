@@ -7,8 +7,6 @@ import { NextNextPhoto } from './NextNextPhoto'
 import { PrevPrevPhoto } from './PrevPrevPhoto'
 
 export const Slideshow: React.FC = () => {
-  const [exitAnimation, setExitAnimation] = useState('exitDown')
-
   const [indices, setIndices] = useState({
     prevPrevIndex: 3,
     prevIndex: 4,
@@ -48,12 +46,6 @@ export const Slideshow: React.FC = () => {
       nextNextIndex: getNextPhotoIndex(indices.nextNextIndex)
     })
 
-    /* setPrevPrev(photos[prevPrevIndex])
-    setPrev(photos[prevIndex])
-    setActive(photos[activeIndex])
-    setNext(photos[nextIndex])
-    setNextNext(photos[nextNextIndex]) */
-
     setImages({
       prevPrev: photos[indices.prevPrevIndex],
       prev: photos[indices.prevIndex],
@@ -70,23 +62,31 @@ export const Slideshow: React.FC = () => {
     console.log('done')
   }
 
-  /*   const moveUp = () => {
-    prevPrevIndex = getPrevPhotoIndex(prevPrevIndex)
-    prevIndex = getPrevPhotoIndex(prevIndex)
-    activeIndex = getPrevPhotoIndex(activeIndex)
-    nextIndex = getPrevPhotoIndex(nextIndex)
-    nextNextIndex = getPrevPhotoIndex(nextNextIndex)
-  } */
+  const moveUp = () => {
+    setIndices({
+      prevPrevIndex: getPrevPhotoIndex(indices.prevPrevIndex),
+      prevIndex: getPrevPhotoIndex(indices.prevIndex),
+      activeIndex: getPrevPhotoIndex(indices.activeIndex),
+      nextIndex: getPrevPhotoIndex(indices.nextIndex),
+      nextNextIndex: getPrevPhotoIndex(indices.nextNextIndex)
+    })
+
+    setImages({
+      prevPrev: photos[indices.prevPrevIndex],
+      prev: photos[indices.prevIndex],
+      active: photos[indices.activeIndex],
+      next: photos[indices.nextIndex],
+      nextNext: photos[indices.nextNextIndex]
+    })
+  }
 
   return (
     <div>
       <NextNextPhoto {...images.nextNext} />
-      <NextPhoto {...images.next} />
+      <NextPhoto {...images.next} onPress={moveDown} />
       <ActivePhoto {...images.active} />
-      <PrevPhoto {...images.prev} />
+      <PrevPhoto {...images.prev} onPress={moveUp} />
       <PrevPrevPhoto {...images.prevPrev} />
-      <div onClick={moveDown}>GO DOWN</div>
-      {/* <div onClick={moveUp}>GO UP</div> */}
     </div>
   )
 }

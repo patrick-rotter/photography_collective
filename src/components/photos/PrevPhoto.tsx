@@ -51,6 +51,7 @@ export const PrevPhoto: React.FC<Photo> = (props) => {
         variants={variants}
         exit="exitDown"
         transition={transition}
+        onClick={props.onPress}
       />
     </AnimatePresence>
   )

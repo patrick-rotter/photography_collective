@@ -6,6 +6,7 @@ import { useStore } from '../../store'
 
 // TODO: Check font in design.. looks different although css is the same
 const StyledIndicatorBar = styled.div`
+  display: inline-block;
   margin-top: 10px;
   display: flex;
   align-items: center;

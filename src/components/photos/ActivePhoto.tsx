@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -25,7 +25,7 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   border: 1px solid #000000;
 `
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -51,15 +51,17 @@ const variants = {
 }
 
 export const transition = {
-  type: 'tween',
-  duration: 1
+  type: 'spring',
+  duration: 1.3
 }
 
 // onExitComplete() from framer motion for animating in text
 
 export const ActivePhoto: React.FC<Photo> = (props) => {
+  const [showText, setShowText] = useState(false)
+
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence exitBeforeEnter onExitComplete={() => setShowText(true)}>
       <StyledPhoto
         $marginTop={-lPhotoHeight / 2}
         $marginLeft={-lPhotoWidth / 2}
@@ -72,10 +74,12 @@ export const ActivePhoto: React.FC<Photo> = (props) => {
         exit={props.exitAnimation}
         transition={transition}
       />
-      <Container>
-        <ImageText />
-        <IndicatorBar />
-      </Container>
+      {showText && (
+        <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+          <ImageText />
+          <IndicatorBar />
+        </Container>
+      )}
     </AnimatePresence>
   )
 }

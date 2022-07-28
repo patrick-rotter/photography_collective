@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useStore } from '../../store'
 
+// TODO: text is a little off to left
 const StyledImageText = styled.div`
   font-size: 220px;
   text-transform: uppercase;

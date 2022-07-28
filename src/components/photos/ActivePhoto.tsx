@@ -12,6 +12,7 @@ import { StyledPhotoType } from '../../global/types'
 import { Photo } from '../../global/types'
 import { ImageText } from './ImageText'
 import { IndicatorBar } from './IndicatorBar'
+import { useWindowSize } from 'usehooks-ts'
 
 const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   position: fixed;
@@ -26,7 +27,7 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 `
 
 const Container = styled(motion.div)`
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -36,12 +37,12 @@ const Container = styled(motion.div)`
 
 // exit y: -6 is necessary for smooth docking... but why?
 const variants = {
-  exitDown: {
-    x: -(window.innerWidth / 2 - (lPhotoWidth / 2 + padding)),
-    y: window.innerHeight / 2 - 6,
+  exitDown: ({ width, height }: { width: number; height: number }) => ({
+    x: -(width / 2 - (lPhotoWidth / 2 + padding)),
+    y: height / 2 - 6,
     width: sPhotoWidth,
     height: sPhotoHeight
-  },
+  }),
   exitUp: {
     x: window.innerWidth / 2 - 6,
     y: -window.innerHeight / 2 + (lPhotoHeight / 2 + padding),
@@ -55,13 +56,16 @@ export const transition = {
   duration: 1.3
 }
 
-// onExitComplete() from framer motion for animating in text
-
 export const ActivePhoto: React.FC<Photo> = (props) => {
   const [showText, setShowText] = useState(false)
+  const { width, height } = useWindowSize()
 
   return (
-    <AnimatePresence exitBeforeEnter onExitComplete={() => setShowText(true)}>
+    <AnimatePresence
+      exitBeforeEnter
+      onExitComplete={() => setShowText(true)}
+      custom={{ width, height }}
+    >
       <StyledPhoto
         $marginTop={-lPhotoHeight / 2}
         $marginLeft={-lPhotoWidth / 2}
@@ -71,6 +75,7 @@ export const ActivePhoto: React.FC<Photo> = (props) => {
         key={props.id}
         alt="Active image"
         variants={variants}
+        custom={{ width, height }}
         exit={props.exitAnimation}
         transition={transition}
       />

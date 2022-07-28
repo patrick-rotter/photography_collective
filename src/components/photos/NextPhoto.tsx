@@ -52,7 +52,6 @@ export const NextPhoto: React.FC<Photo> = (props) => {
         exit={props.exitAnimation}
         transition={transition}
         onClick={props.onPress}
-        whileHover={{ scale: 1.01, transition: { duration: 0.1 } }}
       />
     </AnimatePresence>
   )

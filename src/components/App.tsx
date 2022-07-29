@@ -27,7 +27,7 @@ const StyledContent = styled.div<StyledContentType>`
     z-index: -1;
 
     display: block;
-    background-image: url(${(props) => props.background});
+    background: url(${(props) => props.background});
     -webkit-transition: background-image 0.5s ease-in-out;
     transition: background-image 0.5s ease-in-out;
     background-attachment: scroll;

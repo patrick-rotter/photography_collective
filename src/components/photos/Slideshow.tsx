@@ -87,7 +87,7 @@ export const Slideshow: React.FC = () => {
       next: photos[indices.nextIndex],
       nextNext: photos[indices.nextNextIndex]
     })
-  }, [indices]) */
+  }) */
 
   const moveUp = () => {
     setExitAnimation('exitUp')

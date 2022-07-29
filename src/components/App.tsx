@@ -1,9 +1,9 @@
 import React from 'react'
-import { Title } from './Title'
-import { Link } from './Link'
+import { Title } from './Title/Title'
+import { Link } from './Link/Link'
 import GlobalStyles from './styles/Global'
 import styled from 'styled-components'
-import { Slideshow } from './photos/Slideshow'
+import { Slideshow } from './Slideshow/Slideshow'
 import { useStore } from '../store'
 import { StyledContentType } from '../global/types'
 

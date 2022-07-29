@@ -10,8 +10,8 @@ import {
 } from '../../global/constants'
 import { StyledPhotoType } from '../../global/types'
 import { Photo } from '../../global/types'
-import { ImageText } from './ImageText'
-import { IndicatorBar } from './IndicatorBar'
+import { ImageText } from '../ImageText/ImageText'
+import { IndicatorBar } from '../IndicatorBar/IndicatorBar'
 import { useWindowSize } from 'usehooks-ts'
 
 const StyledPhoto = styled(motion.img)<StyledPhotoType>`

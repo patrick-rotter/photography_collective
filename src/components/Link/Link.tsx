@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useStore } from '../store'
+import { useStore } from '../../store'
 import { motion, AnimatePresence } from 'framer-motion'
 
 const StyledLink = styled(motion.div)`

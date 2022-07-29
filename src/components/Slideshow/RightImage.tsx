@@ -10,13 +10,13 @@ import {
 } from '../../global/constants'
 import { StyledPhotoType } from '../../global/types'
 import { Photo } from '../../global/types'
-import { transition } from './ActivePhoto'
+import { transition } from './ActiveImage'
 import { useWindowSize } from 'usehooks-ts'
 
 const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   position: absolute;
-  bottom: ${(props) => props.$bottom}px;
-  left: ${(props) => props.$left}px;
+  top: ${(props) => props.$top}px;
+  right: ${(props) => props.$right}px;
   width: ${(props) => props.$width}px;
   height: ${(props) => props.$height}px;
   border-radius: 10px;
@@ -25,32 +25,32 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 `
 
 const variants = {
-  exitDown: {
-    x: -300,
-    y: 300,
-    opacity: 0
-  },
-  exitUp: ({ width, height }: { width: number; height: number }) => ({
-    x: width / 2 - (lPhotoWidth / 2 + padding),
-    y: -(height / 2 - (lPhotoHeight / 2 + padding)),
+  exitDown: ({ width, height }: { width: number; height: number }) => ({
+    x: -(width / 2 - (lPhotoWidth / 2 + padding)),
+    y: height / 2 - (lPhotoHeight / 2 + padding),
     width: lPhotoWidth,
     height: lPhotoHeight
-  })
+  }),
+  exitUp: {
+    x: 300,
+    y: -300,
+    opacity: 0
+  }
 }
 
-export const PrevPhoto: React.FC<Photo> = (props) => {
+export const NextPhoto: React.FC<Photo> = (props) => {
   const { width, height } = useWindowSize()
 
   return (
     <AnimatePresence exitBeforeEnter custom={{ width, height }}>
       <StyledPhoto
-        $bottom={padding}
-        $left={padding}
+        $top={padding}
+        $right={padding}
         $width={sPhotoWidth}
         $height={sPhotoHeight}
         src={`./images/image0${props.id}@2x.jpg`}
         key={props.id}
-        alt="Previous image"
+        alt="Next image"
         variants={variants}
         custom={{ width, height }}
         exit={props.exitAnimation}

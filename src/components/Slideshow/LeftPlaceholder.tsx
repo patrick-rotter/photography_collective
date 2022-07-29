@@ -4,12 +4,12 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { sPhotoHeight, sPhotoWidth, padding } from '../../global/constants'
 import { StyledPhotoType } from '../../global/types'
 import { Photo } from '../../global/types'
-import { transition } from './ActivePhoto'
+import { transition } from './ActiveImage'
 
 const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   position: fixed;
-  top: ${(props) => -props.$height}px;
-  right: ${(props) => -props.$width}px;
+  bottom: ${(props) => -props.$height}px;
+  left: ${(props) => -props.$width}px;
   width: ${(props) => props.$width}px;
   height: ${(props) => props.$height}px;
   border-radius: 10px;
@@ -22,27 +22,28 @@ const variants = {
     opacity: 0
   },
   exitDown: {
-    x: -(sPhotoWidth + padding),
-    y: sPhotoHeight + padding,
-    opacity: 1
+    x: -300,
+    y: 300,
+    opacity: 0
   },
   exitUp: {
-    x: 300,
-    y: -300
+    x: sPhotoWidth + padding,
+    y: -(sPhotoHeight + padding),
+    opacity: 1
   }
 }
 
-export const NextNextPhoto: React.FC<Photo> = (props) => {
+export const PrevPrevPhoto: React.FC<Photo> = (props) => {
   return (
     <AnimatePresence exitBeforeEnter>
       <StyledPhoto
-        $top={padding}
-        $right={padding}
+        $bottom={padding}
+        $left={padding}
         $width={sPhotoWidth}
         $height={sPhotoHeight}
         src={`./images/image0${props.id}@2x.jpg`}
         key={props.id}
-        alt="NextNext image"
+        alt="PrevPrev image"
         variants={variants}
         initial="initial"
         exit={props.exitAnimation}

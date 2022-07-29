@@ -40,9 +40,9 @@ export const IndicatorBar: React.FC = () => {
           .fill(0)
           .map((_, i) =>
             i === id - 1 ? (
-              <Indicator filled={true} />
+              <Indicator filled={true} key={i} />
             ) : (
-              <Indicator filled={false} />
+              <Indicator filled={false} key={i} />
             )
           )}
       </Container>

@@ -14,8 +14,9 @@ const StyledSlideshow = styled.div`
 `
 
 export const Slideshow: React.FC = () => {
-  const [exitAnimation, setExitAnimation] = useState('exitDown')
   const { activePhoto, setActivePhoto } = useStore((state) => state)
+  const [exitAnimation, setExitAnimation] = useState('exitDown')
+  const [showText, setShowText] = useState(true)
 
   const [indices, setIndices] = useState({
     prevPrevIndex: photos.length - 2,
@@ -126,6 +127,10 @@ export const Slideshow: React.FC = () => {
     }
   }
 
+  const hideText = () => {
+    setShowText(false)
+  }
+
   return (
     <StyledSlideshow onWheel={handleWheel}>
       <NextNextPhoto {...images.nextNext} exitAnimation={exitAnimation} />
@@ -134,7 +139,12 @@ export const Slideshow: React.FC = () => {
         exitAnimation={exitAnimation}
         onPress={moveDown}
       />
-      <ActivePhoto {...images.active} exitAnimation={exitAnimation} />
+      <ActivePhoto
+        {...images.active}
+        exitAnimation={exitAnimation}
+        showText={showText}
+        hideText={hideText}
+      />
       <PrevPhoto
         {...images.prev}
         exitAnimation={exitAnimation}

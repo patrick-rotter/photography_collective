@@ -57,13 +57,12 @@ export const transition = {
 }
 
 export const ActivePhoto: React.FC<Photo> = (props) => {
-  const [showText, setShowText] = useState(false)
   const { width, height } = useWindowSize()
 
   return (
     <AnimatePresence
       exitBeforeEnter
-      onExitComplete={() => setShowText(true)}
+      onExitComplete={() => props.hideText}
       custom={{ width, height }}
     >
       <StyledPhoto
@@ -79,7 +78,7 @@ export const ActivePhoto: React.FC<Photo> = (props) => {
         exit={props.exitAnimation}
         transition={transition}
       />
-      {showText && (
+      {props.showText && (
         <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <ImageText />
           <IndicatorBar />

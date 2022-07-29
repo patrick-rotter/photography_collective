@@ -28,6 +28,8 @@ const StyledContent = styled.div<StyledContentType>`
 
     display: block;
     background-image: url(${(props) => props.background});
+    -webkit-transition: background-image 0.5s ease-in-out;
+    transition: background-image 0.5s ease-in-out;
     background-attachment: scroll;
     background-position: center;
     background-repeat: no-repeat;

@@ -8,7 +8,7 @@ type StoreState = {
 }
 
 export const useStore = create<StoreState>((set) => ({
-  activePhoto: photos[1],
+  activePhoto: photos[0],
   setActivePhoto: (index: number) => {
     set({ activePhoto: photos[index] })
   }

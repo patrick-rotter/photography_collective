@@ -6,17 +6,23 @@ import { photos } from '../../fixtures/photos'
 import { NextNextPhoto } from './NextNextPhoto'
 import { PrevPrevPhoto } from './PrevPrevPhoto'
 import { useStore } from '../../store'
+import styled from 'styled-components'
+
+const StyledSlideshow = styled.div`
+  width: 100%;
+  height: 100%;
+`
 
 export const Slideshow: React.FC = () => {
   const [exitAnimation, setExitAnimation] = useState('exitDown')
   const { activePhoto, setActivePhoto } = useStore((state) => state)
 
   const [indices, setIndices] = useState({
-    prevPrevIndex: 4,
-    prevIndex: 0,
-    activeIndex: 1,
-    nextIndex: 2,
-    nextNextIndex: 3
+    prevPrevIndex: photos.length - 2,
+    prevIndex: photos.length - 1,
+    activeIndex: 0,
+    nextIndex: 1,
+    nextNextIndex: 2
   })
 
   const [images, setImages] = useState({
@@ -72,6 +78,16 @@ export const Slideshow: React.FC = () => {
     console.log('done')
   }
 
+  /* useEffect(() => {
+    setImages({
+      prevPrev: photos[indices.prevPrevIndex],
+      prev: photos[indices.prevIndex],
+      active: photos[indices.activeIndex],
+      next: photos[indices.nextIndex],
+      nextNext: photos[indices.nextNextIndex]
+    })
+  }, [indices]) */
+
   const moveUp = () => {
     setExitAnimation('exitUp')
 
@@ -92,10 +108,26 @@ export const Slideshow: React.FC = () => {
     })
 
     setActivePhoto(indices.activeIndex)
+
+    console.log(indices.prevPrevIndex)
+    console.log(indices.prevIndex)
+    console.log(indices.activeIndex)
+    console.log(indices.nextIndex)
+    console.log(indices.nextNextIndex)
+    console.log('done')
+  }
+
+  // TODO: What type is event? https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
+  const handleWheel = (e: any) => {
+    if (Math.sign(e.nativeEvent.wheelDelta) === 1) {
+      moveUp()
+    } else {
+      moveDown()
+    }
   }
 
   return (
-    <div>
+    <StyledSlideshow onWheel={handleWheel}>
       <NextNextPhoto {...images.nextNext} exitAnimation={exitAnimation} />
       <NextPhoto
         {...images.next}
@@ -109,6 +141,6 @@ export const Slideshow: React.FC = () => {
         onPress={moveUp}
       />
       <PrevPrevPhoto {...images.prevPrev} exitAnimation={exitAnimation} />
-    </div>
+    </StyledSlideshow>
   )
 }

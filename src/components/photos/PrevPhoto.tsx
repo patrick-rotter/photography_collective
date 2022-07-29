@@ -11,6 +11,7 @@ import {
 import { StyledPhotoType } from '../../global/types'
 import { Photo } from '../../global/types'
 import { transition } from './ActivePhoto'
+import { useWindowSize } from 'usehooks-ts'
 
 const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   position: absolute;
@@ -29,17 +30,19 @@ const variants = {
     y: 300,
     opacity: 0
   },
-  exitUp: {
-    x: window.innerWidth / 2 - (lPhotoWidth / 2 + padding),
-    y: -(window.innerHeight / 2 - (lPhotoHeight / 2 + padding)),
+  exitUp: ({ width, height }: { width: number; height: number }) => ({
+    x: width / 2 - (lPhotoWidth / 2 + padding),
+    y: -(height / 2 - (lPhotoHeight / 2 + padding)),
     width: lPhotoWidth,
     height: lPhotoHeight
-  }
+  })
 }
 
 export const PrevPhoto: React.FC<Photo> = (props) => {
+  const { width, height } = useWindowSize()
+
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence exitBeforeEnter custom={{ width, height }}>
       <StyledPhoto
         $bottom={padding}
         $left={padding}
@@ -49,6 +52,7 @@ export const PrevPhoto: React.FC<Photo> = (props) => {
         key={props.id}
         alt="Previous image"
         variants={variants}
+        custom={{ width, height }}
         exit={props.exitAnimation}
         transition={transition}
         onClick={props.onPress}

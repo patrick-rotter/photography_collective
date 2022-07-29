@@ -43,17 +43,17 @@ const variants = {
     width: sPhotoWidth,
     height: sPhotoHeight
   }),
-  exitUp: {
-    x: window.innerWidth / 2 - 6,
-    y: -window.innerHeight / 2 + (lPhotoHeight / 2 + padding),
+  exitUp: ({ width, height }: { width: number; height: number }) => ({
+    x: width / 2 - 6,
+    y: -height / 2 + (lPhotoHeight / 2 + padding),
     width: sPhotoWidth,
     height: sPhotoHeight
-  }
+  })
 }
 
 export const transition = {
   type: 'spring',
-  duration: 1.3
+  duration: 1.2
 }
 
 export const ActivePhoto: React.FC<Photo> = (props) => {

@@ -7,16 +7,16 @@ import { NextNextPhoto } from './RightPlaceholder'
 import { PrevPrevPhoto } from './LeftPlaceholder'
 import { useStore } from '../../store'
 import styled from 'styled-components'
+import ReactScrollWheelHandler from 'react-scroll-wheel-handler'
 
 const StyledSlideshow = styled.div`
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
 `
 
 export const Slideshow: React.FC = () => {
   const { activePhoto, setActivePhoto } = useStore((state) => state)
   const [exitAnimation, setExitAnimation] = useState('exitDown')
-  const [showText, setShowText] = useState(true)
 
   const [indices, setIndices] = useState({
     prevPrevIndex: photos.length - 2,
@@ -119,38 +119,43 @@ export const Slideshow: React.FC = () => {
   }
 
   // TODO: What type is event? https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
-  const handleWheel = (e: any) => {
+  /*   const handleWheel = (e: any) => {
+    if (animationIsOngoing) {
+      return
+    }
+    setTimeout(() => {
+      setAnimationIsOngoing(false)
+    }, 1300)
+
+    setAnimationIsOngoing(true)
     if (Math.sign(e.nativeEvent.wheelDelta) === 1) {
       moveUp()
     } else {
       moveDown()
     }
-  }
-
-  const hideText = () => {
-    setShowText(false)
-  }
+  } */
 
   return (
-    <StyledSlideshow onWheel={handleWheel}>
-      <NextNextPhoto {...images.nextNext} exitAnimation={exitAnimation} />
-      <NextPhoto
-        {...images.next}
-        exitAnimation={exitAnimation}
-        onPress={moveDown}
-      />
-      <ActivePhoto
-        {...images.active}
-        exitAnimation={exitAnimation}
-        showText={showText}
-        hideText={hideText}
-      />
-      <PrevPhoto
-        {...images.prev}
-        exitAnimation={exitAnimation}
-        onPress={moveUp}
-      />
-      <PrevPrevPhoto {...images.prevPrev} exitAnimation={exitAnimation} />
-    </StyledSlideshow>
+    <ReactScrollWheelHandler
+      upHandler={moveUp}
+      downHandler={moveDown}
+      timeout={1300}
+    >
+      <StyledSlideshow>
+        <NextNextPhoto {...images.nextNext} exitAnimation={exitAnimation} />
+        <NextPhoto
+          {...images.next}
+          exitAnimation={exitAnimation}
+          onPress={moveDown}
+        />
+        <ActivePhoto {...images.active} exitAnimation={exitAnimation} />
+        <PrevPhoto
+          {...images.prev}
+          exitAnimation={exitAnimation}
+          onPress={moveUp}
+        />
+        <PrevPrevPhoto {...images.prevPrev} exitAnimation={exitAnimation} />
+      </StyledSlideshow>
+    </ReactScrollWheelHandler>
   )
 }

@@ -8,8 +8,6 @@ export type Photo = {
   link: string
   onPress?: () => void
   exitAnimation?: string
-  showText?: boolean
-  hideText?: () => void
 }
 
 // $ = transient props (https://stackoverflow.com/questions/57586654/styled-component-attrs-react-does-not-recognize-prop)

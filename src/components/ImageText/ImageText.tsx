@@ -16,6 +16,7 @@ const StyledImageText = styled.div`
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
 
+  // Filled in the middle
   &::before {
     content: attr(data-text);
     color: white;
@@ -24,9 +25,10 @@ const StyledImageText = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    clip-path: polygon(19.95% 0, 19.95% 100%, 80.1% 100%, 80.1% 0);
+    clip-path: polygon(19.95% 0, 19.95% 100%, 80.15% 100%, 80.15% 0);
   }
 
+  // Stroked left and right
   &::after {
     content: attr(data-text);
     color: transparent;

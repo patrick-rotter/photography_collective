@@ -7,7 +7,6 @@ import { Slideshow } from './Slideshow/Slideshow'
 import { useStore } from '../store'
 import { StyledContentType } from '../global/types'
 
-// TODO: fine tune background blur
 const StyledContent = styled.div<StyledContentType>`
   position: relative;
   width: 100vw;

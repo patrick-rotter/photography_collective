@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -52,19 +52,20 @@ const variants = {
 }
 
 export const transition = {
-  type: 'spring',
+  type: 'tween',
   duration: 1.2
 }
 
 export const ActivePhoto: React.FC<Photo> = (props) => {
   const { width, height } = useWindowSize()
+  const [showText, setShowText] = useState(false)
+
+  useEffect(() => {
+    setShowText(true)
+  }, [])
 
   return (
-    <AnimatePresence
-      exitBeforeEnter
-      onExitComplete={() => props.hideText}
-      custom={{ width, height }}
-    >
+    <AnimatePresence exitBeforeEnter custom={{ width, height }}>
       <StyledPhoto
         $marginTop={-lPhotoHeight / 2}
         $marginLeft={-lPhotoWidth / 2}
@@ -78,7 +79,7 @@ export const ActivePhoto: React.FC<Photo> = (props) => {
         exit={props.exitAnimation}
         transition={transition}
       />
-      {props.showText && (
+      {showText && (
         <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           <ImageText />
           <IndicatorBar />

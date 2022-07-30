@@ -25,7 +25,6 @@ const StyledButton = styled.div`
   height: 29px;
   border-radius: 16px;
   font-weight: bold;
-  cursor: pointer;
   transition: background-color 0.15s;
 
   &:hover {

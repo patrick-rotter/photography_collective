@@ -20,11 +20,11 @@ const GlobalStyles = createGlobalStyle`
     font-display: swap;
 }
 
-    *,
-    *::before,
-    *::after {
-      box-sizing: inherit;
-      cursor: none;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  cursor: none;
 }
 
 html {

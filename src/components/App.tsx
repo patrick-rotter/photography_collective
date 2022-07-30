@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { Slideshow } from './Slideshow/Slideshow'
 import { useStore } from '../store'
 import { StyledContentType } from '../global/types'
-import { CustomCursor } from './CustomCursor'
+import { CustomCursor } from './CustomCursor/CustomCursor'
 
 const StyledContent = styled.div<StyledContentType>`
   position: relative;

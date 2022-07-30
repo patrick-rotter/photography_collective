@@ -2,9 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { useStore } from '../../store'
 
-// TODO: text is a little off to left
 const StyledImageText = styled.div`
-  width: 850px;
+  width: 860px;
   position: relative;
   font-size: 220px;
   text-transform: uppercase;
@@ -25,7 +24,7 @@ const StyledImageText = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    clip-path: polygon(19.95% 0, 19.95% 100%, 80.15% 100%, 80.15% 0);
+    clip-path: polygon(20.35% 0, 20.35% 100%, 79.8% 100%, 79.8% 0);
   }
 
   // Stroked left and right

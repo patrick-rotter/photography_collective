@@ -43,7 +43,7 @@ const StyledContent = styled.div<StyledContentType>`
   }
 `
 
-const StyledActive = styled.div`
+/* const StyledActive = styled.div`
   width: 512px;
   height: 680px;
   border: 1px solid red;
@@ -69,7 +69,7 @@ const StyledNext = styled.div`
   position: fixed;
   top: 16px;
   right: 16px;
-`
+` */
 
 const App: React.FC = () => {
   const { url } = useStore((state) => state.activePhoto)
@@ -78,9 +78,7 @@ const App: React.FC = () => {
     <StyledContent background={url}>
       <GlobalStyles />
       <Title />
-      <StyledPrev />
-      <StyledActive />
-      <StyledNext />
+
       <Slideshow />
       <Link />
     </StyledContent>

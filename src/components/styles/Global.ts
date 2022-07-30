@@ -23,7 +23,8 @@ const GlobalStyles = createGlobalStyle`
     *,
     *::before,
     *::after {
-      box-sizing: inherit
+      box-sizing: inherit;
+      cursor: none;
 }
 
 html {

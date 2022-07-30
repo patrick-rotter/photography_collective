@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { Slideshow } from './Slideshow/Slideshow'
 import { useStore } from '../store'
 import { StyledContentType } from '../global/types'
+import { CustomCursor } from './CustomCursor'
 
 const StyledContent = styled.div<StyledContentType>`
   position: relative;
@@ -76,9 +77,9 @@ const App: React.FC = () => {
 
   return (
     <StyledContent background={url}>
+      <CustomCursor />
       <GlobalStyles />
       <Title />
-
       <Slideshow />
       <Link />
     </StyledContent>

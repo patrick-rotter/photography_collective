@@ -21,7 +21,6 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   height: ${(props) => props.$height}px;
   border-radius: 10px;
   border: 1px solid #000000;
-  cursor: pointer;
 `
 
 const variants = {

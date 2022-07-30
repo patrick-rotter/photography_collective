@@ -15,7 +15,9 @@ const StyledSlideshow = styled.div`
 `
 
 export const Slideshow: React.FC = () => {
-  const { activePhoto, setActivePhoto } = useStore((state) => state)
+  const { activePhoto, setActivePhoto, setPathLength } = useStore(
+    (state) => state
+  )
   const [exitAnimation, setExitAnimation] = useState('exitDown')
 
   const [indices, setIndices] = useState({
@@ -48,8 +50,16 @@ export const Slideshow: React.FC = () => {
     return index - 1
   }
 
+  const animateCursor = () => {
+    setPathLength(1)
+    setTimeout(() => {
+      setPathLength(0)
+    }, 600)
+  }
+
   const moveDown = () => {
     setExitAnimation('exitDown')
+    animateCursor()
 
     setIndices({
       prevPrevIndex: getNextPhotoIndex(indices.prevPrevIndex),
@@ -91,6 +101,7 @@ export const Slideshow: React.FC = () => {
 
   const moveUp = () => {
     setExitAnimation('exitUp')
+    animateCursor()
 
     setIndices({
       prevPrevIndex: getPrevPhotoIndex(indices.prevPrevIndex),

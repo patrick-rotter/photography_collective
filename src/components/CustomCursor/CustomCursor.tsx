@@ -5,7 +5,7 @@ import { useStore } from '../../store'
 
 // z-index and position are necessary to layer svg on top of other elements and let mouse-events pass through
 const StyledCursor = styled.svg`
-  position: relative;
+  position: absolute;
   pointer-events: none;
   z-index: 1000;
 `

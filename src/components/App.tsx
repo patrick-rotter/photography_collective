@@ -80,7 +80,9 @@ const App: React.FC = () => {
       <CustomCursor />
       <GlobalStyles />
       <Title />
+
       <Slideshow />
+
       <Link />
     </StyledContent>
   )

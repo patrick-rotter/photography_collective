@@ -24,7 +24,7 @@ const StyledImageText = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    clip-path: polygon(20.35% 0, 20.35% 100%, 79.8% 100%, 79.8% 0);
+    clip-path: polygon(20.27% 0, 20.27% 100%, 79.73% 100%, 79.73% 0);
   }
 
   // Stroked left and right

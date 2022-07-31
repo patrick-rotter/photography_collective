@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { RightImage } from './RightImage'
 import { ActiveImage } from './ActiveImage'
 import { LeftImage } from './LeftImage'
@@ -7,6 +7,8 @@ import { LeftPlaceholder } from './LeftPlaceholder'
 import { useStore } from '../../store'
 import styled from 'styled-components'
 import ReactScrollWheelHandler from 'react-scroll-wheel-handler'
+import { mod } from '../../util'
+import { photos } from '../../fixtures/photos'
 
 const StyledSlideshow = styled.div`
   width: 100vw;
@@ -14,10 +16,13 @@ const StyledSlideshow = styled.div`
 `
 
 export const Slideshow: React.FC = () => {
-  const { setPathLength } = useStore((state) => state)
-  //const [exitAnimation, setExitAnimation] = useState('exitDown')
-
-  const [[isMovingLeft, offset], setOffset] = useState([true, 0])
+  const {
+    activeIndex,
+    setActiveIndex,
+    isMovingLeft,
+    setIsMovingLeft,
+    setPathLength
+  } = useStore((state) => state)
 
   const animateCursor = () => {
     setPathLength(1)
@@ -26,14 +31,16 @@ export const Slideshow: React.FC = () => {
     }, 600)
   }
 
-  const moveDown = () => {
+  const moveCarouselLeft = () => {
     animateCursor()
-    setOffset([true, offset + 1])
+    setActiveIndex(mod(activeIndex + 1, photos.length))
+    setIsMovingLeft(true)
   }
 
-  const moveUp = () => {
+  const moveCarouselRight = () => {
     animateCursor()
-    setOffset([false, offset - 1])
+    setActiveIndex(mod(activeIndex - 1, photos.length))
+    setIsMovingLeft(false)
   }
 
   // TODO: What type is event? https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
@@ -55,24 +62,24 @@ export const Slideshow: React.FC = () => {
 
   return (
     <ReactScrollWheelHandler
-      upHandler={moveUp}
-      downHandler={moveDown}
+      upHandler={moveCarouselRight}
+      downHandler={moveCarouselLeft}
       timeout={1300}
     >
       <StyledSlideshow>
-        <LeftPlaceholder offset={offset} isMovingLeft={isMovingLeft} />
+        <LeftPlaceholder offset={activeIndex} isMovingLeft={isMovingLeft} />
         <LeftImage
-          offset={offset}
+          offset={activeIndex}
           isMovingLeft={isMovingLeft}
-          onPress={moveUp}
+          onPress={moveCarouselRight}
         />
-        <ActiveImage offset={offset} isMovingLeft={isMovingLeft} />
+        <ActiveImage offset={activeIndex} isMovingLeft={isMovingLeft} />
         <RightImage
-          offset={offset}
+          offset={activeIndex}
           isMovingLeft={isMovingLeft}
-          onPress={moveDown}
+          onPress={moveCarouselLeft}
         />
-        <RightPlaceholder offset={offset} isMovingLeft={isMovingLeft} />
+        <RightPlaceholder offset={activeIndex} isMovingLeft={isMovingLeft} />
       </StyledSlideshow>
     </ReactScrollWheelHandler>
   )

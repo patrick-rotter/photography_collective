@@ -1,16 +1,22 @@
 import create from 'zustand'
 
 type StoreState = {
-  offset: number
-  setOffset: (newOffset: number) => void
+  activeIndex: number
+  setActiveIndex: (newIndex: number) => void
+  isMovingLeft: boolean
+  setIsMovingLeft: (value: boolean) => void
   pathLength: number
   setPathLength: (length: number) => void
 }
 
 export const useStore = create<StoreState>((set) => ({
-  offset: 0,
-  setOffset: (newOffset: number) => {
-    set({ offset: newOffset })
+  activeIndex: 0,
+  setActiveIndex: (newIndex: number) => {
+    set({ activeIndex: newIndex })
+  },
+  isMovingLeft: true,
+  setIsMovingLeft: (value: boolean) => {
+    set({ isMovingLeft: value })
   },
   pathLength: 0,
   setPathLength: (length: number) => {

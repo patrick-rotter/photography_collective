@@ -51,7 +51,7 @@ const variants = {
 }
 
 export const Link: React.FC = () => {
-  const index = useStore((state) => state.offset)
+  const index = useStore((state) => state.activeIndex)
   const activeImage = photos[index]
   const { author, commissionedFor, date } = activeImage
   const month = date.toLocaleString('default', { month: 'short' })

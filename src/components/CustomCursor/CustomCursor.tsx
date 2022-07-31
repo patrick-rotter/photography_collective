@@ -8,7 +8,6 @@ const StyledCursor = styled.svg`
   position: absolute;
   pointer-events: none;
   z-index: 1000;
-  transform: rotateY(180deg);
 `
 
 const variants = {

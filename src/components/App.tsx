@@ -74,7 +74,7 @@ const StyledNext = styled.div`
 ` */
 
 const App: React.FC = () => {
-  const index = useStore((state) => state.offset)
+  const index = useStore((state) => state.activeIndex)
 
   return (
     <StyledContent background={photos[index].url}>

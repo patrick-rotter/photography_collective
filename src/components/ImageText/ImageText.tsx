@@ -39,7 +39,7 @@ const StyledImageText = styled.div`
 `
 
 export const ImageText: React.FC = () => {
-  const index = useStore((state) => state.offset)
+  const index = useStore((state) => state.activeIndex)
 
   return <StyledImageText data-text={photos[index].text}></StyledImageText>
 }

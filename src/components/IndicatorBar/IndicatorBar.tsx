@@ -28,7 +28,7 @@ const Container = styled.div`
 `
 
 export const IndicatorBar: React.FC = () => {
-  const index = useStore((state) => state.offset)
+  const index = useStore((state) => state.activeIndex)
 
   return (
     <StyledIndicatorBar>

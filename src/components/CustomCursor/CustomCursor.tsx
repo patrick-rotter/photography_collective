@@ -1,41 +1,42 @@
-import React, { useRef, useEffect } from 'react'
-import styled from 'styled-components'
-import { motion } from 'framer-motion'
-import { useStore } from '../../store'
+import React, { useRef, useEffect } from "react";
+import styled from "styled-components";
+import { motion } from "framer-motion";
+import { useStore } from "../../store";
 
 // z-index and position are necessary to layer svg on top of other elements and let mouse-events pass through
 const StyledCursor = styled.svg`
   position: absolute;
   pointer-events: none;
   z-index: 1000;
-`
+`;
 
 const variants = {
   initial: {
     rotate: 90,
-    pathLength: 0
+    pathLength: 0,
   },
   animate: {
     pathLength: 1,
     transition: {
       duration: 1.2,
-      ease: 'easeInOut'
-    }
-  }
-}
+      ease: "easeInOut",
+    },
+  },
+};
 
 export const CustomCursor: React.FC = () => {
-  const cursorRef = useRef<SVGSVGElement | null>(null)
-  const pathLength = useStore((state) => state.pathLength)
+  const cursorRef = useRef<SVGSVGElement | null>(null);
+  const pathLength = useStore((state) => state.pathLength);
 
+  // Add an event listener to attach custom cursor to actual mouse cursor
   useEffect(() => {
-    document.addEventListener('mousemove', (event) => {
-      const { clientX, clientY } = event
-      const mouseX = clientX - cursorRef.current!.clientWidth / 2
-      const mouseY = clientY - cursorRef.current!.clientHeight / 2
-      cursorRef.current!.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`
-    })
-  }, [])
+    document.addEventListener("mousemove", (event) => {
+      const { clientX, clientY } = event;
+      const mouseX = clientX - cursorRef.current!.clientWidth / 2;
+      const mouseY = clientY - cursorRef.current!.clientHeight / 2;
+      cursorRef.current!.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
+    });
+  }, []);
 
   return (
     <StyledCursor
@@ -57,17 +58,17 @@ export const CustomCursor: React.FC = () => {
           variants={variants}
           initial={{
             rotate: 90,
-            pathLength: 0
+            pathLength: 0,
           }}
           animate={{
             pathLength: pathLength,
             transition: {
               duration: 0.6,
-              ease: 'easeInOut'
-            }
+              ease: "easeInOut",
+            },
           }}
         />
       </g>
     </StyledCursor>
-  )
-}
+  );
+};

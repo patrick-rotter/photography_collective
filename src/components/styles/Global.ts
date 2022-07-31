@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
-const GlobalStyles = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
 
 @font-face {
     font-family: 'Tungsten';
@@ -36,6 +36,4 @@ body {
   font-family: 'Tungsten';
   color: #ffffff;
 }
-`
-
-export default GlobalStyles
+`;

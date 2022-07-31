@@ -1,7 +1,7 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useStore } from '../../store'
-import { photos } from '../../fixtures/photos'
+import React from "react";
+import styled from "styled-components";
+import { useStore } from "../../store";
+import { photos } from "../../fixtures/photos";
 
 const StyledImageText = styled.div`
   width: 860px;
@@ -37,10 +37,10 @@ const StyledImageText = styled.div`
     -webkit-text-fill-color: transparent;
     -webkit-text-stroke-color: white;
   }
-`
+`;
 
 export const ImageText: React.FC = () => {
-  const index = useStore((state) => state.activeIndex)
+  const index = useStore((state) => state.activeIndex);
 
-  return <StyledImageText data-text={photos[index].text}></StyledImageText>
-}
+  return <StyledImageText data-text={photos[index].text} />;
+};

@@ -1,8 +1,8 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useStore } from '../../store'
-import { motion, AnimatePresence } from 'framer-motion'
-import { photos } from '../../fixtures/photos'
+import React from "react";
+import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
+import { useStore } from "../../store";
+import { photos } from "../../fixtures/photos";
 
 const StyledLink = styled(motion.div)`
   position: absolute;
@@ -14,7 +14,7 @@ const StyledLink = styled(motion.div)`
   letter-spacing: 0.08em;
   line-height: 120%;
   width: 109px;
-`
+`;
 
 const StyledButton = styled.div`
   display: flex;
@@ -31,31 +31,31 @@ const StyledButton = styled.div`
   &:hover {
     background-color: #e9e9e9;
   }
-`
+`;
 
 const StyledDate = styled.div`
   margin: 16px 0;
   text-align: right;
-`
+`;
 
 const variants = {
   initial: {
-    opacity: 0
+    opacity: 0,
   },
   animate: {
-    opacity: 1
+    opacity: 1,
   },
   exit: {
-    opacity: 0
-  }
-}
+    opacity: 0,
+  },
+};
 
 export const Link: React.FC = () => {
-  const index = useStore((state) => state.activeIndex)
-  const activeImage = photos[index]
-  const { author, commissionedFor, date } = activeImage
-  const month = date.toLocaleString('default', { month: 'short' })
-  const year = date.getFullYear()
+  const index = useStore((state) => state.activeIndex);
+  const activeImage = photos[index];
+  const { author, commissionedFor, date } = activeImage;
+  const month = date.toLocaleString("default", { month: "short" });
+  const year = date.getFullYear();
 
   return (
     <AnimatePresence>
@@ -68,7 +68,7 @@ export const Link: React.FC = () => {
         key={author + commissionedFor + month + year}
       >
         <motion.div>
-          {author} for {commissionedFor}{' '}
+          {author} for {commissionedFor}{" "}
         </motion.div>
         <StyledDate>
           {month} {year}
@@ -76,5 +76,5 @@ export const Link: React.FC = () => {
         <StyledButton>HAVE A LOOK</StyledButton>
       </StyledLink>
     </AnimatePresence>
-  )
-}
+  );
+};

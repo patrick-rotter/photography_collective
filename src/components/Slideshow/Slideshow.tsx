@@ -1,20 +1,20 @@
-import React from 'react'
-import { RightImage } from './RightImage'
-import { ActiveImage } from './ActiveImage'
-import { LeftImage } from './LeftImage'
-import { RightPlaceholder } from './RightPlaceholder'
-import { LeftPlaceholder } from './LeftPlaceholder'
-import { useStore } from '../../store'
-import styled from 'styled-components'
-import ReactScrollWheelHandler from 'react-scroll-wheel-handler'
-import { mod } from '../../util'
-import { photos } from '../../fixtures/photos'
-import { animationTimeInSec } from '../../global/constants'
+import React from "react";
+import styled from "styled-components";
+import ReactScrollWheelHandler from "react-scroll-wheel-handler";
+import { mod } from "../../util";
+import { photos } from "../../fixtures/photos";
+import { animationTimeInSec } from "../../global/constants";
+import { useStore } from "../../store";
+import { RightImage } from "./RightImage";
+import { ActiveImage } from "./ActiveImage";
+import { LeftImage } from "./LeftImage";
+import { RightPlaceholder } from "./RightPlaceholder";
+import { LeftPlaceholder } from "./LeftPlaceholder";
 
 const StyledSlideshow = styled.div`
   width: 100vw;
   height: 100vh;
-`
+`;
 
 export const Slideshow: React.FC = () => {
   const {
@@ -22,27 +22,27 @@ export const Slideshow: React.FC = () => {
     setActiveIndex,
     isMovingLeft,
     setIsMovingLeft,
-    setPathLength
-  } = useStore((state) => state)
+    setPathLength,
+  } = useStore((state) => state);
 
   const animateCursor = () => {
-    setPathLength(1)
+    setPathLength(1);
     setTimeout(() => {
-      setPathLength(0)
-    }, 600)
-  }
+      setPathLength(0);
+    }, 600);
+  };
 
   const moveCarouselLeft = () => {
-    animateCursor()
-    setActiveIndex(mod(activeIndex + 1, photos.length))
-    setIsMovingLeft(true)
-  }
+    animateCursor();
+    setActiveIndex(mod(activeIndex + 1, photos.length));
+    setIsMovingLeft(true);
+  };
 
   const moveCarouselRight = () => {
-    animateCursor()
-    setActiveIndex(mod(activeIndex - 1, photos.length))
-    setIsMovingLeft(false)
-  }
+    animateCursor();
+    setActiveIndex(mod(activeIndex - 1, photos.length));
+    setIsMovingLeft(false);
+  };
 
   return (
     <ReactScrollWheelHandler
@@ -72,5 +72,5 @@ export const Slideshow: React.FC = () => {
         />
       </StyledSlideshow>
     </ReactScrollWheelHandler>
-  )
-}
+  );
+};

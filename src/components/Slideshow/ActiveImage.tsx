@@ -1,22 +1,22 @@
-import React from 'react'
-import styled from 'styled-components'
-import { motion, AnimatePresence } from 'framer-motion'
+import React from "react";
+import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
+import { useWindowSize } from "usehooks-ts";
 import {
   lImageHeigth,
   lImageWidth,
   padding,
   sImageWidth,
   sImageHeight,
-  animationTimeInSec
-} from '../../global/constants'
-import { SlideshowImage, StyledPhotoType } from '../../global/types'
-import { ImageText } from '../ImageText/ImageText'
-import { IndicatorBar } from '../IndicatorBar/IndicatorBar'
-import { useWindowSize } from 'usehooks-ts'
-import { photos } from '../../fixtures/photos'
-import { mod } from '../../util'
+  animationTimeInSec,
+} from "../../global/constants";
+import { SlideshowImage, StyledImageType } from "../../global/types";
+import { ImageText } from "../ImageText/ImageText";
+import { IndicatorBar } from "../IndicatorBar/IndicatorBar";
+import { photos } from "../../fixtures/photos";
+import { mod } from "../../util";
 
-const StyledPhoto = styled(motion.img)<StyledPhotoType>`
+const StyledImage = styled(motion.img)<StyledImageType>`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -26,7 +26,7 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   height: ${(props) => props.$height}px;
   border-radius: 10px;
   border: 1px solid #000000;
-`
+`;
 
 const Container = styled(motion.div)`
   position: absolute;
@@ -35,17 +35,17 @@ const Container = styled(motion.div)`
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-`
+`;
 
 const variants = {
   exit: ({
     width,
     height,
-    isMovingLeft
+    isMovingLeft,
   }: {
-    width: number
-    height: number
-    isMovingLeft: boolean
+    width: number;
+    height: number;
+    isMovingLeft: boolean;
   }) => ({
     x: isMovingLeft
       ? -(width / 2 - (lImageWidth / 2 + padding))
@@ -54,23 +54,23 @@ const variants = {
       ? height / 2 - 6
       : -height / 2 + (lImageHeigth / 2 + padding),
     width: sImageWidth,
-    height: sImageHeight
-  })
-}
+    height: sImageHeight,
+  }),
+};
 
 export const transition = {
-  type: 'tween',
+  type: "tween",
   duration: animationTimeInSec,
-  ease: 'easeOut'
-}
+  ease: "easeOut",
+};
 
 export const ActiveImage: React.FC<SlideshowImage> = (props) => {
-  const { width, height } = useWindowSize()
-  const { isMovingLeft } = props
+  const { width, height } = useWindowSize();
+  const { isMovingLeft } = props;
 
   return (
     <AnimatePresence exitBeforeEnter custom={{ width, height, isMovingLeft }}>
-      <StyledPhoto
+      <StyledImage
         $marginTop={-lImageHeigth / 2}
         $marginLeft={-lImageWidth / 2}
         $width={lImageWidth}
@@ -91,5 +91,5 @@ export const ActiveImage: React.FC<SlideshowImage> = (props) => {
         <IndicatorBar />
       </Container>
     </AnimatePresence>
-  )
-}
+  );
+};

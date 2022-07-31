@@ -1,13 +1,13 @@
-import React from 'react'
-import { Title } from './Title/Title'
-import { Link } from './Link/Link'
-import GlobalStyles from './styles/Global'
-import styled from 'styled-components'
-import { Slideshow } from './Slideshow/Slideshow'
-import { useStore } from '../store'
-import { StyledContentType } from '../global/types'
-import { CustomCursor } from './CustomCursor/CustomCursor'
-import { photos } from '../fixtures/photos'
+import React from "react";
+import styled from "styled-components";
+import { StyledContentType } from "../global/types";
+import { useStore } from "../store";
+import { photos } from "../fixtures/photos";
+import { Title } from "./Title/Title";
+import { Link } from "./Link/Link";
+import { GlobalStyles } from "./styles/Global";
+import { Slideshow } from "./Slideshow/Slideshow";
+import { CustomCursor } from "./CustomCursor/CustomCursor";
 
 const StyledContent = styled.div<StyledContentType>`
   position: relative;
@@ -19,7 +19,7 @@ const StyledContent = styled.div<StyledContentType>`
   overflow: hidden;
 
   &::before {
-    content: '';
+    content: "";
     position: fixed;
     top: 0;
     left: 0;
@@ -41,10 +41,10 @@ const StyledContent = styled.div<StyledContentType>`
     filter: blur(100px);
     margin: -110px;
   }
-`
+`;
 
-const App: React.FC = () => {
-  const index = useStore((state) => state.activeIndex)
+export const App: React.FC = () => {
+  const index = useStore((state) => state.activeIndex);
 
   return (
     <StyledContent background={photos[index].url}>
@@ -54,7 +54,5 @@ const App: React.FC = () => {
       <Slideshow />
       <Link />
     </StyledContent>
-  )
-}
-
-export default App
+  );
+};

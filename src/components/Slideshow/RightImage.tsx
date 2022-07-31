@@ -1,20 +1,20 @@
-import React from 'react'
-import styled from 'styled-components'
-import { motion, AnimatePresence } from 'framer-motion'
+import React from "react";
+import styled from "styled-components";
+import { motion, AnimatePresence } from "framer-motion";
+import { useWindowSize } from "usehooks-ts";
 import {
   sImageHeight,
   sImageWidth,
   lImageHeigth,
   lImageWidth,
-  padding
-} from '../../global/constants'
-import { SlideshowImage, StyledPhotoType } from '../../global/types'
-import { transition } from './ActiveImage'
-import { useWindowSize } from 'usehooks-ts'
-import { photos } from '../../fixtures/photos'
-import { mod } from '../../util'
+  padding,
+} from "../../global/constants";
+import { SlideshowImage, StyledImageType } from "../../global/types";
+import { photos } from "../../fixtures/photos";
+import { mod } from "../../util";
+import { transition } from "./ActiveImage";
 
-const StyledPhoto = styled(motion.img)<StyledPhotoType>`
+const StyledImage = styled(motion.img)<StyledImageType>`
   position: absolute;
   top: ${(props) => props.$top}px;
   right: ${(props) => props.$right}px;
@@ -22,35 +22,35 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   height: ${(props) => props.$height}px;
   border-radius: 10px;
   border: 1px solid #000000;
-`
+`;
 
 const variants = {
   initial: { opacity: 1 },
   exit: ({
     width,
     height,
-    isMovingLeft
+    isMovingLeft,
   }: {
-    width: number
-    height: number
-    isMovingLeft: boolean
+    width: number;
+    height: number;
+    isMovingLeft: boolean;
   }) => ({
     x: isMovingLeft ? -(width / 2 - (lImageWidth / 2 + padding)) : 300,
     y: isMovingLeft ? height / 2 - (lImageHeigth / 2 + padding) : -300,
     width: isMovingLeft ? lImageWidth : sImageWidth,
     height: isMovingLeft ? lImageHeigth : sImageHeight,
-    opacity: isMovingLeft ? 1 : 0
-  })
-}
+    opacity: isMovingLeft ? 1 : 0,
+  }),
+};
 
 export const RightImage: React.FC<SlideshowImage> = (props) => {
-  const { width, height } = useWindowSize()
-  const { isMovingLeft } = props
-  const offset = 1
+  const { width, height } = useWindowSize();
+  const { isMovingLeft } = props;
+  const offset = 1;
 
   return (
     <AnimatePresence exitBeforeEnter custom={{ width, height, isMovingLeft }}>
-      <StyledPhoto
+      <StyledImage
         $top={padding}
         $right={padding}
         $width={sImageWidth}
@@ -66,5 +66,5 @@ export const RightImage: React.FC<SlideshowImage> = (props) => {
         onClick={props.onPress}
       />
     </AnimatePresence>
-  )
-}
+  );
+};

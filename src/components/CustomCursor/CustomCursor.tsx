@@ -25,15 +25,15 @@ const variants = {
 }
 
 export const CustomCursor: React.FC = () => {
-  const cursorRef = useRef<any>(null)
+  const cursorRef = useRef<SVGSVGElement | null>(null)
   const pathLength = useStore((state) => state.pathLength)
 
   useEffect(() => {
     document.addEventListener('mousemove', (event) => {
       const { clientX, clientY } = event
-      const mouseX = clientX - cursorRef.current.clientWidth / 2
-      const mouseY = clientY - cursorRef.current.clientHeight / 2
-      cursorRef.current.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`
+      const mouseX = clientX - cursorRef.current!.clientWidth / 2
+      const mouseY = clientY - cursorRef.current!.clientHeight / 2
+      cursorRef.current!.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`
     })
   }, [])
 

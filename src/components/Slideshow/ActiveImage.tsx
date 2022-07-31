@@ -83,7 +83,10 @@ export const ActiveImage: React.FC<SlideshowImage> = (props) => {
         exit="exit"
         transition={transition}
       />
-      <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <Container
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, transition: { duration: 0.8 } }}
+      >
         <ImageText />
         <IndicatorBar />
       </Container>

@@ -26,7 +26,6 @@ const StyledContent = styled.div<StyledContentType>`
     right: 0;
     bottom: 0;
     z-index: -1;
-
     display: block;
     background: url(${(props) => props.background});
     -webkit-transition: background-image 0.5s ease-in-out;
@@ -35,7 +34,6 @@ const StyledContent = styled.div<StyledContentType>`
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
     -webkit-filter: blur(100px);
     -moz-filter: blur(100px);
     -o-filter: blur(100px);
@@ -45,34 +43,6 @@ const StyledContent = styled.div<StyledContentType>`
   }
 `
 
-/* const StyledActive = styled.div`
-  width: 512px;
-  height: 680px;
-  border: 1px solid red;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-`
-
-const StyledPrev = styled.div`
-  width: 248px;
-  height: 330px;
-  border: 1px solid red;
-  position: fixed;
-  bottom: 16px;
-  left: 16px;
-`
-
-const StyledNext = styled.div`
-  width: 248px;
-  height: 330px;
-  border: 1px solid red;
-  position: fixed;
-  top: 16px;
-  right: 16px;
-` */
-
 const App: React.FC = () => {
   const index = useStore((state) => state.activeIndex)
 
@@ -81,9 +51,7 @@ const App: React.FC = () => {
       <CustomCursor />
       <GlobalStyles />
       <Title />
-
       <Slideshow />
-
       <Link />
     </StyledContent>
   )

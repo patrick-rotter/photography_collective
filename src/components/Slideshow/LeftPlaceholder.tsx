@@ -39,7 +39,7 @@ export const LeftPlaceholder: React.FC<SlideshowImage> = (props) => {
         $height={sImageHeight}
         src={photos[mod(props.activeIndex + offset, photos.length)].url}
         key={props.activeIndex + offset}
-        alt="PrevPrev image"
+        alt="Left Placeholder"
         variants={variants}
         custom={{ isMovingLeft }}
         initial="initial"

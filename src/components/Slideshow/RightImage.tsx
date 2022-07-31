@@ -57,7 +57,7 @@ export const RightImage: React.FC<SlideshowImage> = (props) => {
         $height={sImageHeight}
         src={photos[mod(props.activeIndex + offset, photos.length)].url}
         key={props.activeIndex + offset}
-        alt="Next image"
+        alt="Right image"
         variants={variants}
         custom={{ width, height, isMovingLeft }}
         initial="initial"

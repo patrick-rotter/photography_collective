@@ -39,7 +39,7 @@ export const RightPlaceholder: React.FC<SlideshowImage> = (props) => {
         $height={sImageHeight}
         src={photos[mod(props.activeIndex + offset, photos.length)].url}
         key={props.activeIndex + offset}
-        alt="NextNext image"
+        alt="Right Placeholder"
         variants={variants}
         custom={{ isMovingLeft }}
         initial="initial"

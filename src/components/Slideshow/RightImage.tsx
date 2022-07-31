@@ -2,10 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  sPhotoHeight,
-  sPhotoWidth,
-  lPhotoHeight,
-  lPhotoWidth,
+  sImageHeight,
+  sImageWidth,
+  lImageHeigth,
+  lImageWidth,
   padding
 } from '../../global/constants'
 import { SlideshowImage, StyledPhotoType } from '../../global/types'
@@ -25,6 +25,7 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 `
 
 const variants = {
+  initial: { opacity: 1 },
   exit: ({
     width,
     height,
@@ -34,29 +35,32 @@ const variants = {
     height: number
     isMovingLeft: boolean
   }) => ({
-    x: isMovingLeft ? -(width / 2 - (lPhotoWidth / 2 + padding)) : 300,
-    y: isMovingLeft ? height / 2 - (lPhotoHeight / 2 + padding) : -300,
-    width: isMovingLeft ? lPhotoWidth : sPhotoWidth,
-    height: isMovingLeft ? lPhotoHeight : sPhotoHeight
+    x: isMovingLeft ? -(width / 2 - (lImageWidth / 2 + padding)) : 300,
+    y: isMovingLeft ? height / 2 - (lImageHeigth / 2 + padding) : -300,
+    width: isMovingLeft ? lImageWidth : sImageWidth,
+    height: isMovingLeft ? lImageHeigth : sImageHeight,
+    opacity: isMovingLeft ? 1 : 0
   })
 }
 
 export const RightImage: React.FC<SlideshowImage> = (props) => {
   const { width, height } = useWindowSize()
   const { isMovingLeft } = props
+  const offset = 1
 
   return (
     <AnimatePresence exitBeforeEnter custom={{ width, height, isMovingLeft }}>
       <StyledPhoto
         $top={padding}
         $right={padding}
-        $width={sPhotoWidth}
-        $height={sPhotoHeight}
-        src={photos[mod(props.offset + 1, photos.length)].url}
-        key={props.offset + 1}
+        $width={sImageWidth}
+        $height={sImageHeight}
+        src={photos[mod(props.activeIndex + offset, photos.length)].url}
+        key={props.activeIndex + offset}
         alt="Next image"
         variants={variants}
         custom={{ width, height, isMovingLeft }}
+        initial="initial"
         exit="exit"
         transition={transition}
         onClick={props.onPress}

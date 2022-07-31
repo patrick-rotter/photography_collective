@@ -11,6 +11,7 @@ const StyledImageText = styled.div`
   text-align: center;
   line-height: 80%;
   letter-spacing: 0.04em;
+  text-indent: 0.04em;
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
@@ -25,7 +26,7 @@ const StyledImageText = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    clip-path: polygon(20.27% 0, 20.27% 100%, 79.73% 100%, 79.73% 0);
+    clip-path: polygon(20.27% 0, 20.27% 100%, 79.8% 100%, 79.8% 0);
   }
 
   // Stroked left and right

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
-import { sPhotoHeight, sPhotoWidth, padding } from '../../global/constants'
+import { sImageHeight, sImageWidth, padding } from '../../global/constants'
 import { SlideshowImage, StyledPhotoType } from '../../global/types'
 import { transition } from './ActiveImage'
 import { photos } from '../../fixtures/photos'
@@ -18,28 +18,27 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 `
 
 const variants = {
-  initial: {
-    opacity: 0
-  },
+  initial: { opacity: 0 },
   exit: ({ isMovingLeft }: { isMovingLeft: boolean }) => ({
-    x: isMovingLeft ? -300 : sPhotoWidth + padding,
-    y: isMovingLeft ? 300 : -(sPhotoHeight + padding),
+    x: isMovingLeft ? -300 : sImageWidth + padding,
+    y: isMovingLeft ? 300 : -(sImageHeight + padding),
     opacity: isMovingLeft ? 0 : 1
   })
 }
 
 export const LeftPlaceholder: React.FC<SlideshowImage> = (props) => {
   const { isMovingLeft } = props
+  const offset = -2
 
   return (
     <AnimatePresence exitBeforeEnter custom={{ isMovingLeft }}>
       <StyledPhoto
         $bottom={padding}
         $left={padding}
-        $width={sPhotoWidth}
-        $height={sPhotoHeight}
-        src={photos[mod(props.offset - 2, photos.length)].url}
-        key={props.offset - 2}
+        $width={sImageWidth}
+        $height={sImageHeight}
+        src={photos[mod(props.activeIndex + offset, photos.length)].url}
+        key={props.activeIndex + offset}
         alt="PrevPrev image"
         variants={variants}
         custom={{ isMovingLeft }}

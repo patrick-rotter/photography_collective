@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  lPhotoHeight,
-  lPhotoWidth,
+  lImageHeigth,
+  lImageWidth,
   padding,
-  sPhotoWidth,
-  sPhotoHeight
+  sImageWidth,
+  sImageHeight,
+  animationTimeInSec
 } from '../../global/constants'
 import { SlideshowImage, StyledPhotoType } from '../../global/types'
 import { ImageText } from '../ImageText/ImageText'
@@ -36,7 +37,6 @@ const Container = styled(motion.div)`
   flex-direction: column;
 `
 
-// exit y: -6 is necessary for smooth docking... but why?
 const variants = {
   exit: ({
     width,
@@ -48,19 +48,19 @@ const variants = {
     isMovingLeft: boolean
   }) => ({
     x: isMovingLeft
-      ? -(width / 2 - (lPhotoWidth / 2 + padding))
-      : width / 2 - 6,
+      ? -(width / 2 - (lImageWidth / 2 + padding))
+      : width / 2 - 9,
     y: isMovingLeft
       ? height / 2 - 6
-      : -height / 2 + (lPhotoHeight / 2 + padding),
-    width: sPhotoWidth,
-    height: sPhotoHeight
+      : -height / 2 + (lImageHeigth / 2 + padding),
+    width: sImageWidth,
+    height: sImageHeight
   })
 }
 
 export const transition = {
   type: 'tween',
-  duration: 1,
+  duration: animationTimeInSec,
   ease: 'easeOut'
 }
 
@@ -76,12 +76,12 @@ export const ActiveImage: React.FC<SlideshowImage> = (props) => {
   return (
     <AnimatePresence exitBeforeEnter custom={{ width, height, isMovingLeft }}>
       <StyledPhoto
-        $marginTop={-lPhotoHeight / 2}
-        $marginLeft={-lPhotoWidth / 2}
-        $width={lPhotoWidth}
-        $height={lPhotoHeight}
-        src={photos[mod(props.offset, photos.length)].url}
-        key={props.offset}
+        $marginTop={-lImageHeigth / 2}
+        $marginLeft={-lImageWidth / 2}
+        $width={lImageWidth}
+        $height={lImageHeigth}
+        src={photos[mod(props.activeIndex, photos.length)].url}
+        key={props.activeIndex}
         alt="Active image"
         variants={variants}
         custom={{ width, height, isMovingLeft }}

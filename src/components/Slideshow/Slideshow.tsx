@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import ReactScrollWheelHandler from 'react-scroll-wheel-handler'
 import { mod } from '../../util'
 import { photos } from '../../fixtures/photos'
+import { animationTimeInSec } from '../../global/constants'
 
 const StyledSlideshow = styled.div`
   width: 100vw;
@@ -43,43 +44,32 @@ export const Slideshow: React.FC = () => {
     setIsMovingLeft(false)
   }
 
-  // TODO: What type is event? https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
-  /*  const handleWheel = (e: any) => {
-    if (animationIsOngoing) {
-      return
-    }
-    setTimeout(() => {
-      setAnimationIsOngoing(false)
-    }, 1300)
-
-    setAnimationIsOngoing(true)
-    if (Math.sign(e.nativeEvent.wheelDelta) === 1) {
-      moveUp()
-    } else {
-      moveDown()
-    }
-  } */
-
   return (
     <ReactScrollWheelHandler
       upHandler={moveCarouselRight}
       downHandler={moveCarouselLeft}
-      timeout={1300}
+      timeout={animationTimeInSec * 1000}
     >
       <StyledSlideshow>
-        <LeftPlaceholder offset={activeIndex} isMovingLeft={isMovingLeft} />
+        <LeftPlaceholder
+          activeIndex={activeIndex}
+          isMovingLeft={isMovingLeft}
+        />
         <LeftImage
-          offset={activeIndex}
+          activeIndex={activeIndex}
           isMovingLeft={isMovingLeft}
           onPress={moveCarouselRight}
         />
-        <ActiveImage offset={activeIndex} isMovingLeft={isMovingLeft} />
+        <ActiveImage activeIndex={activeIndex} isMovingLeft={isMovingLeft} />
         <RightImage
-          offset={activeIndex}
+          activeIndex={activeIndex}
           isMovingLeft={isMovingLeft}
           onPress={moveCarouselLeft}
         />
-        <RightPlaceholder offset={activeIndex} isMovingLeft={isMovingLeft} />
+        <RightPlaceholder
+          activeIndex={activeIndex}
+          isMovingLeft={isMovingLeft}
+        />
       </StyledSlideshow>
     </ReactScrollWheelHandler>
   )

@@ -9,7 +9,7 @@ export type Photo = {
 }
 
 export type SlideshowImage = {
-  offset: number
+  activeIndex: number
   isMovingLeft: boolean
   onPress?: () => void
 }

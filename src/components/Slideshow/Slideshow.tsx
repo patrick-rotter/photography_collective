@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import ReactScrollWheelHandler from "react-scroll-wheel-handler";
 import { mod } from "../../util";
-import { photos } from "../../fixtures/photos";
+import { images } from "../../fixtures/images";
 import { animationTimeInSec } from "../../global/constants";
 import { useStore } from "../../store";
 import { RightImage } from "./RightImage";
@@ -34,13 +34,13 @@ export const Slideshow: React.FC = () => {
 
   const moveCarouselLeft = () => {
     animateCursor();
-    setActiveIndex(mod(activeIndex + 1, photos.length));
+    setActiveIndex(mod(activeIndex + 1, images.length));
     setIsMovingLeft(true);
   };
 
   const moveCarouselRight = () => {
     animateCursor();
-    setActiveIndex(mod(activeIndex - 1, photos.length));
+    setActiveIndex(mod(activeIndex - 1, images.length));
     setIsMovingLeft(false);
   };
 

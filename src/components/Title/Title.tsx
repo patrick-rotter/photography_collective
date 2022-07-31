@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-// TODO: remove margin bottom
 const StyledTitle = styled.h3`
   display: inline-block;
   font-weight: 600;
@@ -10,6 +9,8 @@ const StyledTitle = styled.h3`
   margin: 16px 0 50px 16px;
 `;
 
+const title = "XYZ PHOTOGRAPHY";
+
 export const Title: React.FC = () => {
-  return <StyledTitle>XYZ PHOTOGRAPHY</StyledTitle>;
+  return <StyledTitle>{title}</StyledTitle>;
 };

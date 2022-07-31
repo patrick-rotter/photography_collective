@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { StyledContentType } from "../global/types";
 import { useStore } from "../store";
-import { photos } from "../fixtures/photos";
+import { images } from "../fixtures/images";
 import { Title } from "./Title/Title";
 import { Link } from "./Link/Link";
 import { GlobalStyles } from "./styles/Global";
@@ -47,7 +47,7 @@ export const App: React.FC = () => {
   const index = useStore((state) => state.activeIndex);
 
   return (
-    <StyledContent background={photos[index].url}>
+    <StyledContent background={images[index].url}>
       <CustomCursor />
       <GlobalStyles />
       <Title />

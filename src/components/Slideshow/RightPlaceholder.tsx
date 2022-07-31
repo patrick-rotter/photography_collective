@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { sImageHeight, sImageWidth, padding } from "../../global/constants";
 import { SlideshowImage, StyledImageType } from "../../global/types";
-import { photos } from "../../fixtures/photos";
+import { images } from "../../fixtures/images";
 import { mod } from "../../util";
 import { transition } from "./ActiveImage";
 
@@ -37,7 +37,7 @@ export const RightPlaceholder: React.FC<SlideshowImage> = (props) => {
         $right={padding}
         $width={sImageWidth}
         $height={sImageHeight}
-        src={photos[mod(props.activeIndex + offset, photos.length)].url}
+        src={images[mod(props.activeIndex + offset, images.length)].url}
         key={props.activeIndex + offset}
         alt="Right Placeholder"
         variants={variants}

@@ -1,10 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { useStore } from "../../store";
-import { photos } from "../../fixtures/photos";
+import { images } from "../../fixtures/images";
 import { Indicator } from "./Indicator";
 
-// TODO: Check font in design.. looks different although css is the same
 const StyledIndicatorBar = styled.div`
   display: inline-block;
   margin-top: 10px;
@@ -33,13 +32,13 @@ export const IndicatorBar: React.FC = () => {
   return (
     <StyledIndicatorBar>
       <div>
-        {photos[index].id} OF {photos.length}
+        {images[index].id} OF {images.length}
       </div>
       <Container>
-        {Array(photos.length)
+        {Array(images.length)
           .fill(0)
           .map((_, i) =>
-            i === photos[index].id - 1 ? (
+            i === images[index].id - 1 ? (
               <Indicator filled={true} key={i} />
             ) : (
               <Indicator filled={false} key={i} />

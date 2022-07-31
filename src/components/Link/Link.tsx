@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 import { useStore } from "../../store";
-import { photos } from "../../fixtures/photos";
+import { images } from "../../fixtures/images";
 
 const StyledLink = styled(motion.div)`
   position: absolute;
@@ -52,7 +52,7 @@ const variants = {
 
 export const Link: React.FC = () => {
   const index = useStore((state) => state.activeIndex);
-  const activeImage = photos[index];
+  const activeImage = images[index];
   const { author, commissionedFor, date } = activeImage;
   const month = date.toLocaleString("default", { month: "short" });
   const year = date.getFullYear();
@@ -68,7 +68,7 @@ export const Link: React.FC = () => {
         key={author + commissionedFor + month + year}
       >
         <motion.div>
-          {author} for {commissionedFor}{" "}
+          {author} for {commissionedFor}
         </motion.div>
         <StyledDate>
           {month} {year}

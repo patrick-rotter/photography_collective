@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { useStore } from "../../store";
-import { photos } from "../../fixtures/photos";
+import { images } from "../../fixtures/images";
 
 const StyledImageText = styled.div`
   width: 860px;
@@ -12,10 +12,10 @@ const StyledImageText = styled.div`
   line-height: 80%;
   letter-spacing: 0.04em;
   text-indent: 0.04em;
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* IE10+/Edge */
-  user-select: none; /* Standard */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   // Filled in the middle
   &::before {
@@ -42,5 +42,5 @@ const StyledImageText = styled.div`
 export const ImageText: React.FC = () => {
   const index = useStore((state) => state.activeIndex);
 
-  return <StyledImageText data-text={photos[index].text} />;
+  return <StyledImageText data-text={images[index].text} />;
 };

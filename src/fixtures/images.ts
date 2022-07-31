@@ -1,6 +1,6 @@
 import { Image } from "../global/types";
 
-export const photos: Image[] = [
+export const images: Image[] = [
   {
     id: 1,
     author: "Johanna Hobel",

@@ -13,7 +13,7 @@ import {
 import { SlideshowImage, StyledImageType } from "../../global/types";
 import { ImageText } from "../ImageText/ImageText";
 import { IndicatorBar } from "../IndicatorBar/IndicatorBar";
-import { photos } from "../../fixtures/photos";
+import { images } from "../../fixtures/images";
 import { mod } from "../../util";
 
 const StyledImage = styled(motion.img)<StyledImageType>`
@@ -75,7 +75,7 @@ export const ActiveImage: React.FC<SlideshowImage> = (props) => {
         $marginLeft={-lImageWidth / 2}
         $width={lImageWidth}
         $height={lImageHeigth}
-        src={photos[mod(props.activeIndex, photos.length)].url}
+        src={images[mod(props.activeIndex, images.length)].url}
         key={props.activeIndex}
         alt="Active image"
         variants={variants}

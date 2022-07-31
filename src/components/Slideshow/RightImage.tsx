@@ -10,7 +10,7 @@ import {
   padding,
 } from "../../global/constants";
 import { SlideshowImage, StyledImageType } from "../../global/types";
-import { photos } from "../../fixtures/photos";
+import { images } from "../../fixtures/images";
 import { mod } from "../../util";
 import { transition } from "./ActiveImage";
 
@@ -55,7 +55,7 @@ export const RightImage: React.FC<SlideshowImage> = (props) => {
         $right={padding}
         $width={sImageWidth}
         $height={sImageHeight}
-        src={photos[mod(props.activeIndex + offset, photos.length)].url}
+        src={images[mod(props.activeIndex + offset, images.length)].url}
         key={props.activeIndex + offset}
         alt="Right image"
         variants={variants}
@@ -64,6 +64,12 @@ export const RightImage: React.FC<SlideshowImage> = (props) => {
         exit="exit"
         transition={transition}
         onClick={props.onPress}
+        whileHover={{
+          scale: 1.01,
+          transition: {
+            duration: 0.1,
+          },
+        }}
       />
     </AnimatePresence>
   );

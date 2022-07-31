@@ -38,15 +38,21 @@ const Container = styled(motion.div)`
 
 // exit y: -6 is necessary for smooth docking... but why?
 const variants = {
-  exitDown: ({ width, height }: { width: number; height: number }) => ({
-    x: -(width / 2 - (lPhotoWidth / 2 + padding)),
-    y: height / 2 - 6,
-    width: sPhotoWidth,
-    height: sPhotoHeight
-  }),
-  exitUp: ({ width, height }: { width: number; height: number }) => ({
-    x: width / 2 - 6,
-    y: -height / 2 + (lPhotoHeight / 2 + padding),
+  exit: ({
+    width,
+    height,
+    isMovingLeft
+  }: {
+    width: number
+    height: number
+    isMovingLeft: boolean
+  }) => ({
+    x: isMovingLeft
+      ? -(width / 2 - (lPhotoWidth / 2 + padding))
+      : width / 2 - 6,
+    y: isMovingLeft
+      ? height / 2 - 6
+      : -height / 2 + (lPhotoHeight / 2 + padding),
     width: sPhotoWidth,
     height: sPhotoHeight
   })
@@ -61,13 +67,14 @@ export const transition = {
 export const ActiveImage: React.FC<SlideshowImage> = (props) => {
   const { width, height } = useWindowSize()
   const [showText, setShowText] = useState(false)
+  const { isMovingLeft } = props
 
   useEffect(() => {
     setShowText(true)
   }, [])
 
   return (
-    <AnimatePresence exitBeforeEnter custom={{ width, height }}>
+    <AnimatePresence exitBeforeEnter custom={{ width, height, isMovingLeft }}>
       <StyledPhoto
         $marginTop={-lPhotoHeight / 2}
         $marginLeft={-lPhotoWidth / 2}
@@ -77,8 +84,8 @@ export const ActiveImage: React.FC<SlideshowImage> = (props) => {
         key={props.offset}
         alt="Active image"
         variants={variants}
-        custom={{ width, height }}
-        exit={props.exitAnimation}
+        custom={{ width, height, isMovingLeft }}
+        exit="exit"
         transition={transition}
       />
       {showText && (

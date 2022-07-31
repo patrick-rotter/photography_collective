@@ -18,23 +18,17 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 `
 
 const variants = {
-  initial: {
-    opacity: 0
-  },
-  exitDown: {
-    x: -(sPhotoWidth + padding),
-    y: sPhotoHeight + padding,
-    opacity: 1
-  },
-  exitUp: {
-    x: 300,
-    y: -300
-  }
+  exit: ({ isMovingLeft }: { isMovingLeft: boolean }) => ({
+    x: isMovingLeft ? -(sPhotoWidth + padding) : 300,
+    y: isMovingLeft ? sPhotoHeight + padding : -300
+  })
 }
 
 export const RightPlaceholder: React.FC<SlideshowImage> = (props) => {
+  const { isMovingLeft } = props
+
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence exitBeforeEnter custom={{ isMovingLeft }}>
       <StyledPhoto
         $top={padding}
         $right={padding}
@@ -44,8 +38,9 @@ export const RightPlaceholder: React.FC<SlideshowImage> = (props) => {
         key={props.offset + 2}
         alt="NextNext image"
         variants={variants}
+        custom={{ isMovingLeft }}
         initial="initial"
-        exit={props.exitAnimation}
+        exit="exit"
         transition={transition}
       />
     </AnimatePresence>

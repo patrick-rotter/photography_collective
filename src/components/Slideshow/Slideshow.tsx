@@ -17,7 +17,7 @@ export const Slideshow: React.FC = () => {
   const { setPathLength } = useStore((state) => state)
   //const [exitAnimation, setExitAnimation] = useState('exitDown')
 
-  const [[exitAnimation, offset], setOffset] = useState(['exitDown', 0])
+  const [[isMovingLeft, offset], setOffset] = useState([true, 0])
 
   const animateCursor = () => {
     setPathLength(1)
@@ -28,12 +28,12 @@ export const Slideshow: React.FC = () => {
 
   const moveDown = () => {
     animateCursor()
-    setOffset(['exitDown', offset + 1])
+    setOffset([true, offset + 1])
   }
 
   const moveUp = () => {
     animateCursor()
-    setOffset(['exitUp', offset - 1])
+    setOffset([false, offset - 1])
   }
 
   // TODO: What type is event? https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
@@ -60,19 +60,19 @@ export const Slideshow: React.FC = () => {
       timeout={1300}
     >
       <StyledSlideshow>
-        <LeftPlaceholder offset={offset} exitAnimation={exitAnimation} />
+        <LeftPlaceholder offset={offset} isMovingLeft={isMovingLeft} />
         <LeftImage
           offset={offset}
-          exitAnimation={exitAnimation}
+          isMovingLeft={isMovingLeft}
           onPress={moveUp}
         />
-        <ActiveImage offset={offset} exitAnimation={exitAnimation} />
+        <ActiveImage offset={offset} isMovingLeft={isMovingLeft} />
         <RightImage
           offset={offset}
-          exitAnimation={exitAnimation}
+          isMovingLeft={isMovingLeft}
           onPress={moveDown}
         />
-        <RightPlaceholder offset={offset} exitAnimation={exitAnimation} />
+        <RightPlaceholder offset={offset} isMovingLeft={isMovingLeft} />
       </StyledSlideshow>
     </ReactScrollWheelHandler>
   )

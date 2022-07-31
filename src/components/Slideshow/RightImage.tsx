@@ -25,24 +25,28 @@ const StyledPhoto = styled(motion.img)<StyledPhotoType>`
 `
 
 const variants = {
-  exitDown: ({ width, height }: { width: number; height: number }) => ({
-    x: -(width / 2 - (lPhotoWidth / 2 + padding)),
-    y: height / 2 - (lPhotoHeight / 2 + padding),
-    width: lPhotoWidth,
-    height: lPhotoHeight
-  }),
-  exitUp: {
-    x: 300,
-    y: -300,
-    opacity: 0
-  }
+  exit: ({
+    width,
+    height,
+    isMovingLeft
+  }: {
+    width: number
+    height: number
+    isMovingLeft: boolean
+  }) => ({
+    x: isMovingLeft ? -(width / 2 - (lPhotoWidth / 2 + padding)) : 300,
+    y: isMovingLeft ? height / 2 - (lPhotoHeight / 2 + padding) : -300,
+    width: isMovingLeft ? lPhotoWidth : sPhotoWidth,
+    height: isMovingLeft ? lPhotoHeight : sPhotoHeight
+  })
 }
 
 export const RightImage: React.FC<SlideshowImage> = (props) => {
   const { width, height } = useWindowSize()
+  const { isMovingLeft } = props
 
   return (
-    <AnimatePresence exitBeforeEnter custom={{ width, height }}>
+    <AnimatePresence exitBeforeEnter custom={{ width, height, isMovingLeft }}>
       <StyledPhoto
         $top={padding}
         $right={padding}
@@ -52,8 +56,8 @@ export const RightImage: React.FC<SlideshowImage> = (props) => {
         key={props.offset + 1}
         alt="Next image"
         variants={variants}
-        custom={{ width, height }}
-        exit={props.exitAnimation}
+        custom={{ width, height, isMovingLeft }}
+        exit="exit"
         transition={transition}
         onClick={props.onPress}
       />

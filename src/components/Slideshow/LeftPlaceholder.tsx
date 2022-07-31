@@ -21,21 +21,18 @@ const variants = {
   initial: {
     opacity: 0
   },
-  exitDown: {
-    x: -300,
-    y: 300,
-    opacity: 0
-  },
-  exitUp: {
-    x: sPhotoWidth + padding,
-    y: -(sPhotoHeight + padding),
-    opacity: 1
-  }
+  exit: ({ isMovingLeft }: { isMovingLeft: boolean }) => ({
+    x: isMovingLeft ? -300 : sPhotoWidth + padding,
+    y: isMovingLeft ? 300 : -(sPhotoHeight + padding),
+    opacity: isMovingLeft ? 0 : 1
+  })
 }
 
 export const LeftPlaceholder: React.FC<SlideshowImage> = (props) => {
+  const { isMovingLeft } = props
+
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence exitBeforeEnter custom={{ isMovingLeft }}>
       <StyledPhoto
         $bottom={padding}
         $left={padding}
@@ -45,8 +42,9 @@ export const LeftPlaceholder: React.FC<SlideshowImage> = (props) => {
         key={props.offset - 2}
         alt="PrevPrev image"
         variants={variants}
+        custom={{ isMovingLeft }}
         initial="initial"
-        exit={props.exitAnimation}
+        exit="exit"
         transition={transition}
       />
     </AnimatePresence>

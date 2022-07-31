@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -66,12 +66,7 @@ export const transition = {
 
 export const ActiveImage: React.FC<SlideshowImage> = (props) => {
   const { width, height } = useWindowSize()
-  const [showText, setShowText] = useState(false)
   const { isMovingLeft } = props
-
-  useEffect(() => {
-    setShowText(true)
-  }, [])
 
   return (
     <AnimatePresence exitBeforeEnter custom={{ width, height, isMovingLeft }}>
@@ -88,12 +83,10 @@ export const ActiveImage: React.FC<SlideshowImage> = (props) => {
         exit="exit"
         transition={transition}
       />
-      {showText && (
-        <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <ImageText />
-          <IndicatorBar />
-        </Container>
-      )}
+      <Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <ImageText />
+        <IndicatorBar />
+      </Container>
     </AnimatePresence>
   )
 }

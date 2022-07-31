@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useStore } from '../../store'
 import { motion, AnimatePresence } from 'framer-motion'
+import { photos } from '../../fixtures/photos'
 
 const StyledLink = styled(motion.div)`
   position: absolute;
@@ -50,9 +51,9 @@ const variants = {
 }
 
 export const Link: React.FC = () => {
-  const { author, commissionedFor, date } = useStore(
-    (state) => state.activePhoto
-  )
+  const index = useStore((state) => state.offset)
+  const activeImage = photos[index]
+  const { author, commissionedFor, date } = activeImage
   const month = date.toLocaleString('default', { month: 'short' })
   const year = date.getFullYear()
 

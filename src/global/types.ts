@@ -6,8 +6,12 @@ export type Photo = {
   text: string
   date: Date
   link: string
+}
+
+export type SlideshowImage = {
+  offset: number
+  exitAnimation: string
   onPress?: () => void
-  exitAnimation?: string
 }
 
 // $ = transient props (https://stackoverflow.com/questions/57586654/styled-component-attrs-react-does-not-recognize-prop)

@@ -2,9 +2,10 @@ import React from 'react'
 import styled from 'styled-components'
 import { motion, AnimatePresence } from 'framer-motion'
 import { sPhotoHeight, sPhotoWidth, padding } from '../../global/constants'
-import { StyledPhotoType } from '../../global/types'
-import { Photo } from '../../global/types'
+import { SlideshowImage, StyledPhotoType } from '../../global/types'
 import { transition } from './ActiveImage'
+import { photos } from '../../fixtures/photos'
+import { mod } from '../../util'
 
 const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   position: fixed;
@@ -32,7 +33,7 @@ const variants = {
   }
 }
 
-export const PrevPrevPhoto: React.FC<Photo> = (props) => {
+export const LeftPlaceholder: React.FC<SlideshowImage> = (props) => {
   return (
     <AnimatePresence exitBeforeEnter>
       <StyledPhoto
@@ -40,8 +41,8 @@ export const PrevPrevPhoto: React.FC<Photo> = (props) => {
         $left={padding}
         $width={sPhotoWidth}
         $height={sPhotoHeight}
-        src={`./images/image0${props.id}@2x.jpg`}
-        key={props.id}
+        src={photos[mod(props.offset - 2, photos.length)].url}
+        key={props.offset - 2}
         alt="PrevPrev image"
         variants={variants}
         initial="initial"

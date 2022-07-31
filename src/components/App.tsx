@@ -7,6 +7,7 @@ import { Slideshow } from './Slideshow/Slideshow'
 import { useStore } from '../store'
 import { StyledContentType } from '../global/types'
 import { CustomCursor } from './CustomCursor/CustomCursor'
+import { photos } from '../fixtures/photos'
 
 const StyledContent = styled.div<StyledContentType>`
   position: relative;
@@ -73,10 +74,10 @@ const StyledNext = styled.div`
 ` */
 
 const App: React.FC = () => {
-  const { url } = useStore((state) => state.activePhoto)
+  const index = useStore((state) => state.offset)
 
   return (
-    <StyledContent background={url}>
+    <StyledContent background={photos[index].url}>
       <CustomCursor />
       <GlobalStyles />
       <Title />

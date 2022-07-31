@@ -8,10 +8,11 @@ import {
   lPhotoWidth,
   padding
 } from '../../global/constants'
-import { StyledPhotoType } from '../../global/types'
-import { Photo } from '../../global/types'
+import { SlideshowImage, StyledPhotoType } from '../../global/types'
 import { transition } from './ActiveImage'
 import { useWindowSize } from 'usehooks-ts'
+import { photos } from '../../fixtures/photos'
+import { mod } from '../../util'
 
 const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   position: absolute;
@@ -37,7 +38,7 @@ const variants = {
   })
 }
 
-export const PrevPhoto: React.FC<Photo> = (props) => {
+export const LeftImage: React.FC<SlideshowImage> = (props) => {
   const { width, height } = useWindowSize()
 
   return (
@@ -47,8 +48,8 @@ export const PrevPhoto: React.FC<Photo> = (props) => {
         $left={padding}
         $width={sPhotoWidth}
         $height={sPhotoHeight}
-        src={`./images/image0${props.id}@2x.jpg`}
-        key={props.id}
+        src={photos[mod(props.offset - 1, photos.length)].url}
+        key={props.offset - 1}
         alt="Previous image"
         variants={variants}
         custom={{ width, height }}

@@ -8,11 +8,12 @@ import {
   sPhotoWidth,
   sPhotoHeight
 } from '../../global/constants'
-import { StyledPhotoType } from '../../global/types'
-import { Photo } from '../../global/types'
+import { SlideshowImage, StyledPhotoType } from '../../global/types'
 import { ImageText } from '../ImageText/ImageText'
 import { IndicatorBar } from '../IndicatorBar/IndicatorBar'
 import { useWindowSize } from 'usehooks-ts'
+import { photos } from '../../fixtures/photos'
+import { mod } from '../../util'
 
 const StyledPhoto = styled(motion.img)<StyledPhotoType>`
   position: fixed;
@@ -53,10 +54,11 @@ const variants = {
 
 export const transition = {
   type: 'tween',
-  duration: 1.2
+  duration: 1,
+  ease: 'easeOut'
 }
 
-export const ActivePhoto: React.FC<Photo> = (props) => {
+export const ActiveImage: React.FC<SlideshowImage> = (props) => {
   const { width, height } = useWindowSize()
   const [showText, setShowText] = useState(false)
 
@@ -71,8 +73,8 @@ export const ActivePhoto: React.FC<Photo> = (props) => {
         $marginLeft={-lPhotoWidth / 2}
         $width={lPhotoWidth}
         $height={lPhotoHeight}
-        src={`./images/image0${props.id}@2x.jpg`}
-        key={props.id}
+        src={photos[mod(props.offset, photos.length)].url}
+        key={props.offset}
         alt="Active image"
         variants={variants}
         custom={{ width, height }}

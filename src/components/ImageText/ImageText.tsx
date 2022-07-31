@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useStore } from '../../store'
+import { photos } from '../../fixtures/photos'
 
 const StyledImageText = styled.div`
   width: 860px;
@@ -38,7 +39,7 @@ const StyledImageText = styled.div`
 `
 
 export const ImageText: React.FC = () => {
-  const { text } = useStore((state) => state.activePhoto)
+  const index = useStore((state) => state.offset)
 
-  return <StyledImageText data-text={text}></StyledImageText>
+  return <StyledImageText data-text={photos[index].text}></StyledImageText>
 }

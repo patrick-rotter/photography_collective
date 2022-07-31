@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { NextPhoto } from './RightImage'
-import { ActivePhoto } from './ActiveImage'
-import { PrevPhoto } from './LeftImage'
-import { photos } from '../../fixtures/photos'
-import { NextNextPhoto } from './RightPlaceholder'
-import { PrevPrevPhoto } from './LeftPlaceholder'
+import { RightImage } from './RightImage'
+import { ActiveImage } from './ActiveImage'
+import { LeftImage } from './LeftImage'
+import { RightPlaceholder } from './RightPlaceholder'
+import { LeftPlaceholder } from './LeftPlaceholder'
 import { useStore } from '../../store'
 import styled from 'styled-components'
 import ReactScrollWheelHandler from 'react-scroll-wheel-handler'
@@ -15,40 +14,10 @@ const StyledSlideshow = styled.div`
 `
 
 export const Slideshow: React.FC = () => {
-  const { activePhoto, setActivePhoto, setPathLength } = useStore(
-    (state) => state
-  )
-  const [exitAnimation, setExitAnimation] = useState('exitDown')
+  const { setPathLength } = useStore((state) => state)
+  //const [exitAnimation, setExitAnimation] = useState('exitDown')
 
-  const [indices, setIndices] = useState({
-    prevPrevIndex: photos.length - 2,
-    prevIndex: photos.length - 1,
-    activeIndex: 0,
-    nextIndex: 1,
-    nextNextIndex: 2
-  })
-
-  const [images, setImages] = useState({
-    prevPrev: photos[indices.prevPrevIndex],
-    prev: photos[indices.prevIndex],
-    active: photos[indices.activeIndex],
-    next: photos[indices.nextIndex],
-    nextNext: photos[indices.nextNextIndex]
-  })
-
-  const getNextPhotoIndex = (index: number): number => {
-    if (index >= photos.length - 1) {
-      return 0
-    }
-    return index + 1
-  }
-
-  const getPrevPhotoIndex = (index: number): number => {
-    if (index === 0) {
-      return photos.length - 1
-    }
-    return index - 1
-  }
+  const [[exitAnimation, offset], setOffset] = useState(['exitDown', 0])
 
   const animateCursor = () => {
     setPathLength(1)
@@ -58,79 +27,17 @@ export const Slideshow: React.FC = () => {
   }
 
   const moveDown = () => {
-    setExitAnimation('exitDown')
     animateCursor()
-
-    setIndices({
-      prevPrevIndex: getNextPhotoIndex(indices.prevPrevIndex),
-      prevIndex: getNextPhotoIndex(indices.prevIndex),
-      activeIndex: getNextPhotoIndex(indices.activeIndex),
-      nextIndex: getNextPhotoIndex(indices.nextIndex),
-      nextNextIndex: getNextPhotoIndex(indices.nextNextIndex)
-    })
-
-    setImages({
-      prevPrev: photos[indices.prevPrevIndex],
-      prev: photos[indices.prevIndex],
-      active: photos[indices.activeIndex],
-      next: photos[indices.nextIndex],
-      nextNext: photos[indices.nextNextIndex]
-    })
-
-    setActivePhoto(indices.activeIndex)
-
-    console.log(activePhoto)
-
-    console.log(indices.prevPrevIndex)
-    console.log(indices.prevIndex)
-    console.log(indices.activeIndex)
-    console.log(indices.nextIndex)
-    console.log(indices.nextNextIndex)
-    console.log('done')
+    setOffset(['exitDown', offset + 1])
   }
 
-  /* useEffect(() => {
-    setImages({
-      prevPrev: photos[indices.prevPrevIndex],
-      prev: photos[indices.prevIndex],
-      active: photos[indices.activeIndex],
-      next: photos[indices.nextIndex],
-      nextNext: photos[indices.nextNextIndex]
-    })
-  }) */
-
   const moveUp = () => {
-    setExitAnimation('exitUp')
     animateCursor()
-
-    setIndices({
-      prevPrevIndex: getPrevPhotoIndex(indices.prevPrevIndex),
-      prevIndex: getPrevPhotoIndex(indices.prevIndex),
-      activeIndex: getPrevPhotoIndex(indices.activeIndex),
-      nextIndex: getPrevPhotoIndex(indices.nextIndex),
-      nextNextIndex: getPrevPhotoIndex(indices.nextNextIndex)
-    })
-
-    setImages({
-      prevPrev: photos[indices.prevPrevIndex],
-      prev: photos[indices.prevIndex],
-      active: photos[indices.activeIndex],
-      next: photos[indices.nextIndex],
-      nextNext: photos[indices.nextNextIndex]
-    })
-
-    setActivePhoto(indices.activeIndex)
-
-    console.log(indices.prevPrevIndex)
-    console.log(indices.prevIndex)
-    console.log(indices.activeIndex)
-    console.log(indices.nextIndex)
-    console.log(indices.nextNextIndex)
-    console.log('done')
+    setOffset(['exitUp', offset - 1])
   }
 
   // TODO: What type is event? https://developer.mozilla.org/en-US/docs/Web/API/Element/wheel_event
-  /*   const handleWheel = (e: any) => {
+  /*  const handleWheel = (e: any) => {
     if (animationIsOngoing) {
       return
     }
@@ -153,19 +60,19 @@ export const Slideshow: React.FC = () => {
       timeout={1300}
     >
       <StyledSlideshow>
-        <NextNextPhoto {...images.nextNext} exitAnimation={exitAnimation} />
-        <NextPhoto
-          {...images.next}
-          exitAnimation={exitAnimation}
-          onPress={moveDown}
-        />
-        <ActivePhoto {...images.active} exitAnimation={exitAnimation} />
-        <PrevPhoto
-          {...images.prev}
+        <LeftPlaceholder offset={offset} exitAnimation={exitAnimation} />
+        <LeftImage
+          offset={offset}
           exitAnimation={exitAnimation}
           onPress={moveUp}
         />
-        <PrevPrevPhoto {...images.prevPrev} exitAnimation={exitAnimation} />
+        <ActiveImage offset={offset} exitAnimation={exitAnimation} />
+        <RightImage
+          offset={offset}
+          exitAnimation={exitAnimation}
+          onPress={moveDown}
+        />
+        <RightPlaceholder offset={offset} exitAnimation={exitAnimation} />
       </StyledSlideshow>
     </ReactScrollWheelHandler>
   )
